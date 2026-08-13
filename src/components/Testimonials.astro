@@ -1,0 +1,139 @@
+---
+const reviews = [
+	{
+		text: "My daughter started a few months ago and the transformation in her confidence is incredible. The coaches balance discipline with making it genuinely fun. We couldn't be happier.",
+		name: "Sarah M.",
+		role: "Fencing Parent",
+		stars: 5
+	},
+	{
+		text: "Training here has completely elevated my game. The technical feedback is unmatched, and the competitive environment pushes you to be your absolute best on the strip.",
+		name: "David L.",
+		role: "Competitive Epee Fencer",
+		stars: 5
+	},
+	{
+		text: "I always wanted to try fencing but was intimidated to start later in life. The adult classes are so welcoming and provide a fantastic workout. Highly recommend giving it a try!",
+		name: "Emily R.",
+		role: "Adult Beginner",
+		stars: 5
+	},
+];
+---
+
+<section class="testimonials" id="reviews">
+	<div class="testimonials-container">
+		<h2 class="testimonials-title">What Our Fencers Say</h2>
+		<div class="testimonial-grid">
+			{reviews.map((rev) => (
+				<div class="review-card">
+					<div class="stars">
+						{Array.from({ length: rev.stars }).map(() => (
+							<i class="fas fa-star"></i>
+						))}
+					</div>
+					<p class="review-text">"{rev.text}"</p>
+					<div class="reviewer-info">
+						<div class="reviewer-name">{rev.name}</div>
+						<div class="reviewer-role">{rev.role}</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.testimonials {
+		background-color: var(--primary-green);
+		color: var(--text-light);
+		padding: var(--section-padding);
+	}
+
+	.testimonials-container {
+		max-width: 1240px;
+		margin: 0 auto;
+	}
+
+	.testimonials-title {
+		text-align: center;
+		font-size: 2.5rem;
+		margin-bottom: 3.5rem;
+		color: var(--bg-cream);
+	}
+
+	.testimonial-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.review-card {
+		background-color: var(--bg-cream);
+		color: var(--text-dark);
+		padding: 2.5rem 2rem;
+		border-radius: var(--border-radius);
+		text-align: left;
+		position: relative;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		overflow: hidden;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.review-card::after {
+		content: '\201D';
+		font-family: Georgia, serif;
+		font-size: 9rem;
+		color: rgba(0, 59, 43, 0.06);
+		position: absolute;
+		top: -20px;
+		right: 15px;
+		line-height: 1;
+		z-index: -1;
+	}
+
+	.stars {
+		color: var(--gold);
+		font-size: 1.1rem;
+		margin-bottom: 1.25rem;
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	.review-text {
+		font-style: italic;
+		margin-bottom: 1.75rem;
+		opacity: 0.92;
+		font-size: 1.05rem;
+		line-height: 1.6;
+	}
+
+	.reviewer-info {
+		border-top: 2px solid rgba(0, 59, 43, 0.1);
+		padding-top: 1rem;
+	}
+
+	.reviewer-name {
+		font-weight: 800;
+		font-family: var(--font-headings);
+		text-transform: uppercase;
+		font-size: 0.95rem;
+		color: var(--primary-green);
+	}
+
+	.reviewer-role {
+		font-size: 0.85rem;
+		opacity: 0.75;
+		font-weight: 500;
+	}
+
+	@media (max-width: 768px) {
+		.testimonials-title {
+			font-size: 2rem;
+			margin-bottom: 2.5rem;
+		}
+	}
+</style>

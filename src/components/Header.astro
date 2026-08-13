@@ -1,0 +1,260 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<header class="site-header">
+	<div class="header-container">
+		<a href={`${base}#home`} class="logo-link" aria-label="Duke City Fencing Club Home">
+			<img src={`${base}logo.png`} alt="Duke City Fencing Club Logo" class="logo-img" width="82" height="80" />
+		</a>
+		<nav class="main-nav" aria-label="Main Navigation">
+			<ul class="nav-links">
+				<li><a href={`${base}#home`}>Home</a></li>
+				<li><a href={`${base}#programs`}>Programs</a></li>
+				<li><a href={`${base}#coaches`}>Our Team</a></li>
+				<li><a href={`${base}#reviews`}>Reviews</a></li>
+				<li><a href={`${base}#news`}>News</a></li>
+				<li><a href={`${base}#contact`}>Contact</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button class="btn-cta open-booking" type="button">Book A Class</button>
+			<button class="mobile-toggle" aria-label="Toggle navigation menu" type="button" id="mobileMenuBtn">
+				<i class="fas fa-bars"></i>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div class="mobile-menu-drawer" id="mobileMenuDrawer">
+	<div class="mobile-menu-header">
+		<img src={`${base}logo.png`} alt="Duke City Fencing Club Logo" class="logo-img-small" />
+		<button class="mobile-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+	</div>
+	<ul class="mobile-nav-links">
+		<li><a href={`${base}#home`} class="mobile-link">Home</a></li>
+		<li><a href={`${base}#programs`} class="mobile-link">Programs</a></li>
+		<li><a href={`${base}#coaches`} class="mobile-link">Our Team</a></li>
+		<li><a href={`${base}#reviews`} class="mobile-link">Reviews</a></li>
+		<li><a href={`${base}#news`} class="mobile-link">News</a></li>
+		<li><a href={`${base}#contact`} class="mobile-link">Contact</a></li>
+	</ul>
+	<div class="mobile-cta-wrapper">
+		<button class="btn-cta open-booking mobile-full-cta" type="button">Book A Class</button>
+	</div>
+</div>
+
+<style>
+	.site-header {
+		background-color: var(--primary-green);
+		color: var(--text-light);
+		padding: 0.85rem 2rem;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+	}
+
+	.header-container {
+		max-width: 1240px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo-link {
+		display: flex;
+		align-items: center;
+	}
+
+	.logo-img {
+		max-height: 60px;
+		width: auto;
+		transition: transform 0.3s ease;
+	}
+
+	.logo-link:hover .logo-img {
+		transform: scale(1.04);
+	}
+
+	.nav-links {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.nav-links a {
+		font-weight: 600;
+		font-size: 0.95rem;
+		letter-spacing: 0.5px;
+		color: var(--text-light);
+		position: relative;
+		transition: color 0.3s ease;
+		padding: 0.25rem 0;
+	}
+
+	.nav-links a::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background-color: var(--accent-red);
+		transition: width 0.3s ease;
+	}
+
+	.nav-links a:hover {
+		color: var(--accent-red);
+	}
+
+	.nav-links a:hover::after {
+		width: 100%;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.btn-cta {
+		background-color: var(--accent-red);
+		color: var(--text-light);
+		padding: 0.75rem 1.6rem;
+		border-radius: var(--border-radius);
+		font-weight: 700;
+		font-family: var(--font-headings);
+		text-transform: uppercase;
+		border: none;
+		cursor: pointer;
+		transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+		letter-spacing: 1px;
+		font-size: 0.85rem;
+		box-shadow: 0 4px 10px rgba(226, 10, 23, 0.35);
+	}
+
+	.btn-cta:hover {
+		background-color: var(--accent-red-hover);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 15px rgba(226, 10, 23, 0.5);
+	}
+
+	.mobile-toggle {
+		display: none;
+		background: none;
+		border: none;
+		color: var(--text-light);
+		font-size: 1.6rem;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+
+	/* Mobile Menu Drawer */
+	.mobile-menu-drawer {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		width: 85%;
+		max-width: 380px;
+		height: 100vh;
+		background-color: var(--primary-green);
+		z-index: 1000;
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+		box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+		transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.mobile-menu-drawer.active {
+		right: 0;
+	}
+
+	.mobile-menu-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2.5rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	}
+
+	.logo-img-small {
+		max-height: 48px;
+		width: auto;
+	}
+
+	.mobile-close {
+		background: none;
+		border: none;
+		color: var(--text-light);
+		font-size: 2.5rem;
+		cursor: pointer;
+		line-height: 1;
+	}
+
+	.mobile-nav-links {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.mobile-nav-links a {
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: var(--text-light);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		display: block;
+		padding: 0.4rem 0;
+	}
+
+	.mobile-nav-links a:hover {
+		color: var(--accent-red);
+	}
+
+	.mobile-full-cta {
+		width: 100%;
+		text-align: center;
+		padding: 1rem;
+		font-size: 1rem;
+	}
+
+	@media (max-width: 900px) {
+		.main-nav {
+			display: none;
+		}
+		.btn-cta.open-booking:not(.mobile-full-cta) {
+			display: none;
+		}
+		.mobile-toggle {
+			display: block;
+		}
+	}
+</style>
+
+<script>
+	const menuBtn = document.getElementById('mobileMenuBtn');
+	const menuClose = document.getElementById('mobileMenuClose');
+	const drawer = document.getElementById('mobileMenuDrawer');
+	const links = document.querySelectorAll('.mobile-link');
+
+	menuBtn?.addEventListener('click', () => {
+		drawer?.classList.add('active');
+	});
+
+	menuClose?.addEventListener('click', () => {
+		drawer?.classList.remove('active');
+	});
+
+	links.forEach(link => {
+		link.addEventListener('click', () => {
+			drawer?.classList.remove('active');
+		});
+	});
+</script>

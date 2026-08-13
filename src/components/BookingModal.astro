@@ -1,0 +1,245 @@
+---
+// Modal component for class booking integration
+---
+
+<div id="bookingModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+	<div class="modal-content">
+		<button class="close-modal" id="closeModalBtn" aria-label="Close booking window">&times;</button>
+		
+		<div class="modal-header">
+			<h2 id="modalTitle">Book Your Session</h2>
+			<p>Select your class and proceed directly to our secure registration system.</p>
+		</div>
+
+		<div class="booking-slot">
+			<div class="slot-badge">Featured</div>
+			<h4>Trial Class / Beginner Session</h4>
+			<div class="slot-details">
+				<span><i class="far fa-calendar-alt"></i> Mon, Wed, Fri</span>
+				<span class="slot-price">Check Pricing</span>
+			</div>
+		</div>
+
+		<div class="booking-features">
+			<div class="feature-item"><i class="fas fa-check-circle"></i> Gear provided for beginners</div>
+			<div class="feature-item"><i class="fas fa-check-circle"></i> Olympic-level coaching</div>
+			<div class="feature-item"><i class="fas fa-check-circle"></i> Fun, safe, and engaging</div>
+		</div>
+
+		<a 
+			href="https://duke-city-fencing-club.gymdesk.com/book" 
+			target="_blank" 
+			rel="noopener noreferrer" 
+			class="btn-pay"
+		>
+			Continue to Booking & Payment <i class="fas fa-arrow-right"></i>
+		</a>
+	</div>
+</div>
+
+<style>
+	.modal-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(5px);
+		display: none;
+		justify-content: center;
+		align-items: center;
+		z-index: 10000;
+		padding: 1.5rem;
+	}
+
+	.modal-overlay.active {
+		display: flex;
+	}
+
+	.modal-content {
+		background-color: var(--bg-cream);
+		color: var(--text-dark);
+		border-radius: var(--border-radius);
+		width: 100%;
+		max-width: 520px;
+		padding: 2.5rem 2rem;
+		position: relative;
+		box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+		animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		border: 2px solid var(--primary-green);
+	}
+
+	@keyframes modalFadeIn {
+		from {
+			opacity: 0;
+			transform: scale(0.92) translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1) translateY(0);
+		}
+	}
+
+	.close-modal {
+		position: absolute;
+		top: 1rem;
+		right: 1.25rem;
+		font-size: 2.2rem;
+		background: none;
+		border: none;
+		color: var(--text-dark);
+		cursor: pointer;
+		line-height: 1;
+		opacity: 0.6;
+		transition: opacity 0.2s, color 0.2s;
+	}
+
+	.close-modal:hover {
+		opacity: 1;
+		color: var(--accent-red);
+	}
+
+	.modal-header {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.modal-header h2 {
+		font-size: 2rem;
+		color: var(--primary-green);
+		margin-bottom: 0.5rem;
+	}
+
+	.modal-header p {
+		font-size: 0.95rem;
+		opacity: 0.8;
+	}
+
+	.booking-slot {
+		background: #fff;
+		border: 2px solid var(--primary-green);
+		padding: 1.5rem;
+		border-radius: var(--border-radius);
+		margin-bottom: 1.5rem;
+		position: relative;
+	}
+
+	.slot-badge {
+		position: absolute;
+		top: -12px;
+		right: 15px;
+		background-color: var(--accent-red);
+		color: #fff;
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+		letter-spacing: 0.5px;
+	}
+
+	.booking-slot h4 {
+		font-size: 1.25rem;
+		color: var(--primary-green);
+		margin-bottom: 0.6rem;
+	}
+
+	.slot-details {
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #555;
+	}
+
+	.slot-details i {
+		color: var(--accent-red);
+		margin-right: 0.35rem;
+	}
+
+	.slot-price {
+		color: var(--primary-green);
+		font-weight: 700;
+	}
+
+	.booking-features {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		margin-bottom: 2rem;
+		padding: 0 0.5rem;
+	}
+
+	.feature-item {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--text-dark);
+	}
+
+	.feature-item i {
+		color: var(--primary-green);
+		font-size: 1rem;
+	}
+
+	.btn-pay {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		width: 100%;
+		background-color: var(--accent-red);
+		color: var(--text-light);
+		padding: 1rem 1.5rem;
+		border-radius: var(--border-radius);
+		font-weight: 800;
+		font-family: var(--font-headings);
+		text-transform: uppercase;
+		font-size: 1rem;
+		border: none;
+		cursor: pointer;
+		text-align: center;
+		transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+		box-shadow: 0 4px 15px rgba(226, 10, 23, 0.4);
+		letter-spacing: 1px;
+	}
+
+	.btn-pay:hover {
+		background-color: var(--accent-red-hover);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(226, 10, 23, 0.55);
+	}
+</style>
+
+<script>
+	const modal = document.getElementById('bookingModal');
+	const openButtons = document.querySelectorAll('.open-booking');
+	const closeBtn = document.getElementById('closeModalBtn');
+
+	openButtons.forEach((button) => {
+		button.addEventListener('click', (e) => {
+			e.preventDefault();
+			modal?.classList.add('active');
+			modal?.setAttribute('aria-hidden', 'false');
+		});
+	});
+
+	closeBtn?.addEventListener('click', () => {
+		modal?.classList.remove('active');
+		modal?.setAttribute('aria-hidden', 'true');
+	});
+
+	window.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			modal?.classList.remove('active');
+			modal?.setAttribute('aria-hidden', 'true');
+		}
+	});
+
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && modal?.classList.contains('active')) {
+			modal.classList.remove('active');
+			modal.setAttribute('aria-hidden', 'true');
+		}
+	});
+</script>

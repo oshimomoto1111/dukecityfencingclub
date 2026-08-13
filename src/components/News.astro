@@ -1,0 +1,208 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<section class="news-section" id="news">
+	<div class="news-container">
+		<h2 class="section-title">Latest News & Events</h2>
+		<div class="bento-grid">
+			
+			<!-- Noticia Principal Destacada -->
+			<div class="news-card news-card-featured" style={`background-image: url('${base}noticia-principal.jpg');`}>
+				<div class="news-content">
+					<span class="news-tag tag-achievement">🏆 Achievement</span>
+					<span class="news-date">August 2026</span>
+					<h3 class="news-title">Duke City Fencers Take Gold at Regional Championship!</h3>
+					<p class="news-excerpt">
+						Our competitive team dominated the strip this past weekend, bringing home multiple medals and national qualification points.
+					</p>
+					<button class="news-link open-booking" type="button">Join the Team ➔</button>
+				</div>
+			</div>
+
+			<!-- Noticias Secundarias -->
+			<div class="bento-side">
+				<div class="news-card news-card-small" style={`background-image: url('${base}noticia-camp.jpg');`}>
+					<div class="news-content">
+						<span class="news-tag tag-event">📅 Event</span>
+						<span class="news-date">Upcoming Intensive</span>
+						<h4 class="news-title">High-Performance Summer Training Camp</h4>
+						<button class="news-link open-booking" type="button">View Dates & Register ➔</button>
+					</div>
+				</div>
+
+				<div class="news-card news-card-small" style={`background-image: url('${base}noticia-aviso.jpg');`}>
+					<div class="news-content">
+						<span class="news-tag tag-announcement">📢 Announcement</span>
+						<span class="news-date">Club Schedule Update</span>
+						<h4 class="news-title">New Open Armorer & Conditioning Hours</h4>
+						<button class="news-link open-booking" type="button">Check Schedule ➔</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<style>
+	.news-section {
+		padding: var(--section-padding);
+		background-color: var(--bg-cream);
+	}
+
+	.news-container {
+		max-width: 1240px;
+		margin: 0 auto;
+	}
+
+	.bento-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		gap: 2rem;
+	}
+
+	.bento-side {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.news-card {
+		position: relative;
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		color: var(--text-light);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 2.25rem;
+		background-size: cover;
+		background-position: center;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+		transition: transform 0.4s ease, box-shadow 0.4s ease;
+		cursor: pointer;
+	}
+
+	.news-card-featured {
+		min-height: 490px;
+		height: 100%;
+	}
+
+	.news-card-small {
+		flex: 1;
+		min-height: 230px;
+	}
+
+	.news-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to top, rgba(0, 59, 43, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+		transition: background 0.4s ease;
+		z-index: 1;
+	}
+
+	.news-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+	}
+
+	.news-card:hover::before {
+		background: linear-gradient(to top, rgba(0, 59, 43, 0.98) 0%, rgba(0, 0, 0, 0.6) 100%);
+	}
+
+	.news-content {
+		position: relative;
+		z-index: 2;
+	}
+
+	.news-tag {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		padding: 0.35rem 0.85rem;
+		border-radius: 50px;
+		letter-spacing: 1px;
+		margin-bottom: 0.8rem;
+	}
+
+	.tag-achievement {
+		background-color: var(--accent-red);
+		color: var(--text-light);
+	}
+
+	.tag-event {
+		background-color: var(--gold);
+		color: var(--text-dark);
+	}
+
+	.tag-announcement {
+		background-color: var(--primary-green);
+		color: var(--text-light);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+	}
+
+	.news-date {
+		font-size: 0.85rem;
+		opacity: 0.85;
+		margin-bottom: 0.75rem;
+		display: block;
+		font-weight: 500;
+	}
+
+	.news-title {
+		font-size: 1.35rem;
+		line-height: 1.25;
+		margin-bottom: 0.6rem;
+		color: var(--bg-cream);
+	}
+
+	.news-card-featured .news-title {
+		font-size: 2.1rem;
+		line-height: 1.15;
+		margin-bottom: 0.85rem;
+	}
+
+	.news-excerpt {
+		font-size: 0.95rem;
+		opacity: 0.92;
+		margin-bottom: 1.25rem;
+		line-height: 1.6;
+	}
+
+	.news-link {
+		background: none;
+		border: none;
+		padding: 0;
+		font-size: 0.85rem;
+		font-weight: 700;
+		font-family: var(--font-headings);
+		text-transform: uppercase;
+		color: var(--bg-cream);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: gap 0.3s, color 0.3s;
+		cursor: pointer;
+		letter-spacing: 0.5px;
+	}
+
+	.news-card:hover .news-link {
+		gap: 0.8rem;
+		color: var(--accent-red);
+	}
+
+	@media (max-width: 900px) {
+		.bento-grid {
+			grid-template-columns: 1fr;
+		}
+		.news-card-featured {
+			min-height: 380px;
+		}
+		.news-card-featured .news-title {
+			font-size: 1.7rem;
+		}
+	}
+</style>

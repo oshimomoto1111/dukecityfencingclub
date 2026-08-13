@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Programs from '../components/Programs.astro';
+import Coaches from '../components/Coaches.astro';
+import Testimonials from '../components/Testimonials.astro';
+import News from '../components/News.astro';
+import Footer from '../components/Footer.astro';
+import BookingModal from '../components/BookingModal.astro';
+---
+
+<Layout 
+	title="Duke City Fencing Club | Albuquerque, NM"
+	description="Train with 3-time Olympic Medalist Courtney Hurley at Duke City Fencing Club. Youth, competitive, and adult fencing programs in Albuquerque, New Mexico."
+>
+	<Header />
+	<main>
+		<Hero />
+		<Programs />
+		<Coaches />
+		<Testimonials />
+		<News />
+	</main>
+	<Footer />
+	<BookingModal />
+</Layout>

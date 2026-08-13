@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duke City Fencing Club | Albuquerque, NM</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Íconos para Redes Sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           CSS Variables - Alqimia Creativa
+           ========================================= */
+        :root {
+            --primary-green: #003B2B; 
+            --bg-cream: #FAF6EE;      
+            --accent-red: #E20A17;    
+            --text-dark: #1A1A1A;
+            --text-light: #F4F4F4;
+            --font-headings: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --section-padding: 5rem 2rem;
+            --border-radius: 8px;
+        }
+
+        /* =========================================
+           Global Reset & Typography
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: var(--bg-cream); color: var(--text-dark); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: var(--font-headings); text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+
+        /* =========================================
+           Navigation (Header)
+           ========================================= */
+        header {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-img { max-height: 65px; width: auto; }
+        nav ul { list-style: none; display: flex; gap: 2rem; }
+        nav a { font-weight: 600; font-size: 1rem; letter-spacing: 0.5px; transition: color 0.3s; }
+        nav a:hover { color: var(--accent-red); }
+        
+        .btn-cta {
+            background-color: var(--accent-red);
+            color: var(--text-light);
+            padding: 0.85rem 1.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            letter-spacing: 1px;
+        }
+        .btn-cta:hover { background-color: #B20710; transform: translateY(-2px); }
+
+        /* =========================================
+           Hero Section (Video Background)
+           ========================================= */
+        .hero { position: relative; text-align: center; border-bottom: 5px solid var(--accent-red); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .hero-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; color: var(--text-light); padding: 0 2rem; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; line-height: 1.1; letter-spacing: 2px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; margin-inline: auto; opacity: 0.9; }
+        .trust-badge { display: inline-block; background: rgba(255, 255, 255, 0.1); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; margin-bottom: 2rem; border: 1px solid rgba(255, 255, 255, 0.2); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* =========================================
+           Programs (Hover Reveal Grid)
+           ========================================= */
+        .programs { padding: var(--section-padding); max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3.5rem; color: var(--primary-green); }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .program-card { position: relative; height: 420px; border-radius: var(--border-radius); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); cursor: pointer; }
+        .bg-default, .bg-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 0.6s ease, transform 0.6s ease; }
+        .bg-hover { opacity: 0; transform: scale(1.05); }
+        .program-card:hover .bg-default { opacity: 0; }
+        .program-card:hover .bg-hover { opacity: 1; transform: scale(1); }
+        .program-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 59, 43, 0.95) 0%, rgba(0, 59, 43, 0.3) 60%, transparent 100%); z-index: 1; transition: background 0.6s ease; }
+        .program-card:hover::after { background: linear-gradient(to top, rgba(0, 59, 43, 0.95) 0%, rgba(0, 59, 43, 0.8) 100%); }
+        .card-content { position: relative; z-index: 2; padding: 2rem; color: var(--text-light); text-align: center; transform: translateY(115px); transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .program-card:hover .card-content { transform: translateY(0); }
+        .card-content h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--bg-cream); text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .card-details { opacity: 0; transition: opacity 0.5s ease; }
+        .program-card:hover .card-details { opacity: 1; transition-delay: 0.15s; }
+        .card-details p { font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; color: var(--bg-cream); }
+        .btn-card { display: inline-block; background-color: var(--accent-red); color: var(--text-light); padding: 0.6rem 1.2rem; border-radius: var(--border-radius); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; transition: background 0.3s; border: none; cursor: pointer; }
+        .btn-card:hover { background-color: #B20710; }
+
+        /* =========================================
+           Authority / Coaches Section
+           ========================================= */
+        .authority { background-color: var(--text-dark); color: var(--text-light); padding: var(--section-padding); }
+        .coach-showcase { display: grid; grid-template-columns: 40% 60%; align-items: center; gap: 4rem; max-width: 1150px; margin: 0 auto; margin-bottom: 5rem; }
+        .coach-img-container { width: 100%; display: flex; justify-content: center; }
+        .coach-img { width: 100%; max-width: 380px; height: auto; border-radius: var(--border-radius); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); object-fit: cover; }
+        .coach-text h2 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--bg-cream); }
+        .coach-text p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 1.5rem; }
+        .team-section-title { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: var(--bg-cream); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4rem; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .team-card { background-color: rgba(255, 255, 255, 0.05); border-radius: var(--border-radius); padding: 2rem; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .team-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 3px solid var(--accent-red); }
+        .team-name { font-size: 1.5rem; color: var(--bg-cream); margin-bottom: 0.5rem; }
+        .team-role { font-size: 0.9rem; color: var(--accent-red); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+
+        /* =========================================
+           Testimonials / Reviews Section
+           ========================================= */
+        .testimonials { background-color: var(--primary-green); color: var(--text-light); padding: var(--section-padding); text-align: center; }
+        .testimonials h2 { font-size: 2.5rem; margin-bottom: 3rem; color: var(--bg-cream); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .review-card { background-color: var(--bg-cream); color: var(--text-dark); padding: 2.5rem 2rem; border-radius: var(--border-radius); text-align: left; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.15); overflow: hidden; z-index: 1; }
+        .review-card::after { content: '\201D'; font-family: Georgia, serif; font-size: 10rem; color: rgba(0, 59, 43, 0.04); position: absolute; top: -30px; right: 10px; line-height: 1; z-index: -1; }
+        .stars { color: #D4AF37; font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 2px; }
+        .review-text { font-style: italic; margin-bottom: 1.5rem; opacity: 0.9; font-size: 1.05rem; }
+        .reviewer-info { border-top: 2px solid rgba(0, 59, 43, 0.1); padding-top: 1rem; }
+        .reviewer-name { font-weight: 700; font-family: var(--font-headings); text-transform: uppercase; font-size: 0.95rem; color: var(--primary-green); }
+        .reviewer-role { font-size: 0.85rem; opacity: 0.7; }
+
+        /* =========================================
+           Latest News & Events (Bento Box)
+           ========================================= */
+        .news-section { padding: var(--section-padding); max-width: 1200px; margin: auto; }
+        .bento-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; }
+        .bento-side { display: flex; flex-direction: column; gap: 2rem; }
+        .news-card { position: relative; border-radius: var(--border-radius); overflow: hidden; color: var(--text-light); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; background-size: cover; background-position: center; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: pointer; }
+        .news-card-featured { min-height: 480px; height: 100%; }
+        .news-card-small { flex: 1; min-height: 225px; }
+        .news-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 59, 43, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%); transition: background 0.4s ease; z-index: 1; }
+        .news-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        .news-card:hover::before { background: linear-gradient(to top, rgba(0, 59, 43, 0.98) 0%, rgba(0, 0, 0, 0.6) 100%); }
+        .news-content { position: relative; z-index: 2; }
+        .news-tag { display: inline-block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 50px; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .tag-achievement { background-color: var(--accent-red); color: var(--text-light); }
+        .tag-event { background-color: #D4AF37; color: var(--text-dark); }
+        .tag-announcement { background-color: var(--primary-green); color: var(--text-light); border: 1px solid rgba(255,255,255,0.3); }
+        .news-title { font-size: 1.4rem; line-height: 1.2; margin-bottom: 0.5rem; color: var(--bg-cream); }
+        .news-card-featured .news-title { font-size: 2.1rem; }
+        .news-date { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.75rem; display: block; }
+        .news-excerpt { font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.2rem; line-height: 1.5; }
+        .news-link { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--bg-cream); display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s, color 0.3s; }
+        .news-card:hover .news-link { gap: 0.8rem; color: var(--accent-red); }
+
+        /* =========================================
+           FOOTER ESTRATÉGICO
+           ========================================= */
+        .site-footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: var(--section-padding);
+            border-top: 5px solid var(--primary-green);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-col h4 {
+            color: var(--bg-cream);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-red);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        /* Columna 1: Marca y Redes */
+        .footer-logo {
+            max-height: 80px;
+            margin-bottom: 1.5rem;
+        }
+        .footer-about {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .social-icons a:hover {
+            background-color: var(--accent-red);
+            transform: translateY(-3px);
+        }
+
+        /* Columna 2: Contacto */
+        .contact-list {
+            list-style: none;
+        }
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        .contact-list i {
+            color: var(--accent-red);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Columna 3: Mapa */
+        .map-container {
+            width: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        /* =========================================
+           BOOKING MODAL (POP-UP)
+           ========================================= */
+        .modal-overlay { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 59, 43, 0.85); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-content { background-color: var(--bg-cream); width: 90%; max-width: 500px; border-radius: 12px; padding: 2.5rem; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3); text-align: center; animation: modalFadeIn 0.3s ease-out forwards; }
+        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .close-modal { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: var(--primary-green); cursor: pointer; font-weight: bold; line-height: 1; transition: color 0.3s; }
+        .close-modal:hover { color: var(--accent-red); }
+        .modal-header h2 { color: var(--primary-green); font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .modal-header p { color: #555; font-size: 0.95rem; margin-bottom: 2rem; }
+        .booking-slot { background: white; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .booking-slot h4 { color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .slot-details { display: flex; justify-content: space-between; align-items: center; color: #666; font-size: 0.95rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee; }
+        .slot-price { font-weight: 700; color: var(--primary-green); font-size: 1.1rem; }
+        .btn-pay { width: 100%; padding: 1rem; font-size: 1.1rem; border-radius: 8px; background-color: var(--accent-red); color: white; font-weight: 800; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.3s, transform 0.2s; }
+        .btn-pay:hover { background-color: #B20710; transform: translateY(-2px); }
+
+        /* =========================================
+           Responsive Design
+           ========================================= */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .coach-showcase { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+            .card-content { transform: translateY(0); }
+            .card-details { opacity: 1; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="#home">
+            <img src="logo.png" alt="Duke City Fencing Logo" class="logo-img">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#coaches">Our Team</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="btn-cta open-booking">Book A Class</button>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" id="home">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="trust-badge">★ Olympic-Level Training</div>
+            <h1>STRIKE FIRST</h1>
+            <p>Elite competitive and recreational fencing in Albuquerque, NM. Led by 3-time Olympian and World Medalist, Courtney Hurley.</p>
+            <button class="btn-cta open-booking">Book Your Class</button>
+        </div>
+    </section>
+
+    <!-- 2. PROGRAMS -->
+    <section class="programs" id="programs">
+        <h2 class="section-title">Our Programs</h2>
+        <div class="grid-container">
+            <div class="program-card">
+                <div class="bg-default" style="background-color: #333; background-image: url('foto-jovenes-1.jpg');"></div>
+                <div class="bg-hover" style="background-color: #111; background-image: url('foto-jovenes-2.jpg');"></div>
+                <div class="card-content">
+                    <h3>Youth & Beginners</h3>
+                    <div class="card-details">
+                        <p>The perfect starting point. Focused on fundamentals, safety, and fun for new fencers of all ages.</p>
+                        <button class="btn-card open-booking">Book A Class</button>
+                    </div>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="bg-default" style="background-color: #444; background-image: url('foto-competitivo-1.jpg');"></div>
+                <div class="bg-hover" style="background-color: #222; background-image: url('foto-competitivo-2.jpg');"></div>
+                <div class="card-content">
+                    <h3>Competitive Epee</h3>
+                    <div class="card-details">
+                        <p>For serious athletes. Advanced tactics, footwork, and preparation for national and international tournaments.</p>
+                        <button class="btn-card open-booking">Book A Class</button>
+                    </div>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="bg-default" style="background-color: #555; background-image: url('foto-adultos-1.jpg');"></div>
+                <div class="bg-hover" style="background-color: #333; background-image: url('foto-adultos-2.jpg');"></div>
+                <div class="card-content">
+                    <h3>Adult Fencing</h3>
+                    <div class="card-details">
+                        <p>Recreational and conditioning classes designed for adults. It is never too late to start your journey.</p>
+                        <button class="btn-card open-booking">Book A Class</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. AUTHORITY / TEAM -->
+    <section class="authority" id="coaches">
+        <div class="coach-showcase">
+            <div class="coach-img-container">
+                <img src="courtney.jpg" alt="Coach Courtney Hurley" class="coach-img">
+            </div>
+            <div class="coach-text">
+                <h2>Learn from an Olympic Medalist</h2>
+                <p>Led by 3-time Olympian and London 2012 Bronze Medalist, Courtney Hurley. As a certified Fencing Maestra—the highest coaching distinction worldwide—Courtney brings over 20 years of elite competitive experience directly to Albuquerque.</p>
+                <p>Whether you are stepping onto the strip for the first time or aiming for the national podium, you are learning from the very best.</p>
+                <a href="#" class="btn-solid">Read Full Bio</a>
+            </div>
+        </div>
+
+        <h3 class="team-section-title">Meet Our Coaching Staff</h3>
+        <div class="team-grid">
+            <div class="team-card"><img src="andy.jpg" alt="Coach Andy" class="team-avatar"><h4 class="team-name">Andy</h4><div class="team-role">Adult Fencing Coach</div></div>
+            <div class="team-card"><img src="bella.jpg" alt="Coach Bella" class="team-avatar"><h4 class="team-name">Bella</h4><div class="team-role">Fencing Coach</div></div>
+            <div class="team-card"><img src="izaya.jpg" alt="Coach Izaya" class="team-avatar"><h4 class="team-name">Izaya</h4><div class="team-role">Fencing Coach</div></div>
+            <div class="team-card"><img src="violet.jpg" alt="Coach Violet" class="team-avatar"><h4 class="team-name">Violet</h4><div class="team-role">Fencing Coach</div></div>
+        </div>
+    </section>
+
+    <!-- 4. TESTIMONIALS / REVIEWS -->
+    <section class="testimonials" id="reviews">
+        <h2>What Our Fencers Say</h2>
+        <div class="testimonial-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"My daughter started a few months ago and the transformation in her confidence is incredible. The coaches balance discipline with making it genuinely fun. We couldn't be happier."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Sarah M.</div>
+                    <div class="reviewer-role">Fencing Parent</div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Training here has completely elevated my game. The technical feedback is unmatched, and the competitive environment pushes you to be your absolute best on the strip."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-name">David L.</div>
+                    <div class="reviewer-role">Competitive Epee Fencer</div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"I always wanted to try fencing but was intimidated to start later in life. The adult classes are so welcoming and provide a fantastic workout. Highly recommend giving it a try!"</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-name">Emily R.</div>
+                    <div class="reviewer-role">Adult Beginner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LATEST NEWS & EVENTS -->
+    <section class="news-section" id="news">
+        <h2 class="section-title">Latest News & Events</h2>
+        <div class="bento-grid">
+            <div class="news-card news-card-featured" style="background-color: #222; background-image: url('noticia-principal.jpg');">
+                <div class="news-content">
+                    <span class="news-tag tag-achievement">🏆 Achievement</span>
+                    <span class="news-date">August 2026</span>
+                    <h3 class="news-title">Duke City Fencers Take Gold at Regional Championship!</h3>
+                    <p class="news-excerpt">Our competitive team dominated the strip this past weekend, bringing home multiple medals and national qualification points.</p>
+                    <a href="#" class="news-link">Read Full Story ➔</a>
+                </div>
+            </div>
+            <div class="bento-side">
+                <div class="news-card news-card-small" style="background-color: #333; background-image: url('noticia-camp.jpg');">
+                    <div class="news-content">
+                        <span class="news-tag tag-event">📅 Event</span>
+                        <span class="news-date">Upcoming Camp</span>
+                        <h4 class="news-title">High-Performance Intensive Camp</h4>
+                        <a href="#" class="news-link">View Dates & Register ➔</a>
+                    </div>
+                </div>
+                <div class="news-card news-card-small" style="background-color: #444; background-image: url('noticia-aviso.jpg');">
+                    <div class="news-content">
+                        <span class="news-tag tag-announcement">📢 Announcement</span>
+                        <span class="news-date">Club Update</span>
+                        <h4 class="news-title">New Open Armorer & Conditioning Hours</h4>
+                        <a href="#" class="news-link">Check Schedule ➔</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 6. FOOTER ESTRATÉGICO -->
+    <footer class="site-footer" id="contact">
+        <div class="footer-grid">
+            
+            <!-- Columna 1: Marca y Redes Sociales -->
+            <div class="footer-col">
+                <img src="logo.png" alt="Duke City Fencing Logo" class="footer-logo">
+                <p class="footer-about">Master the Art of Fencing. Elite competitive and recreational programs in the heart of Albuquerque.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/dukecityfencing/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/p/Duke-City-Fencing-100035399540775/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/@DukeCityFencing" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@dukecityfencing" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Información de Contacto + Google Maps -->
+            <div class="footer-col">
+                <h4>Contact & Location</h4>
+                <ul class="contact-list" style="margin-bottom: 1.5rem;">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>
+                            <strong>Menaul School Gymnasium</strong><br>
+                            301 Menaul Blvd NE<br>
+                            Albuquerque, NM 87107
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>info@dukecityfencing.net</span>
+                    </li>
+                </ul>
+                <!-- Google Maps embebido directamente bajo la dirección -->
+                <div class="map-container" style="border: 2px solid rgba(255,255,255,0.1);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3264.4449767664687!2d-106.6346!3d35.1075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87227494e808266d%3A0x6b44a30e8c05763!2s301%20Menaul%20Blvd%20NE%2C%20Albuquerque%2C%20NM%2087107!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Columna 3: Mapa del Campus (Croquis Exclusivo) -->
+            <div class="footer-col">
+                <h4>Find Us On Campus</h4>
+                <div class="map-container" style="border: none;">
+                    <img src="mapa menaul.png" alt="Campus Map to Duke City Fencing Club" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                </div>
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 1rem; line-height: 1.4;">
+                    *Use the Google map to arrive, then follow the red arrows on this campus map to find the Gym.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Duke City Fencing Club. All rights reserved. | Website designed by Alqimia Creativa.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE RESERVAS (OCULTO POR DEFECTO) -->
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>Book Your Session</h2>
+                <p>Select your class and proceed directly to payment.</p>
+            </div>
+            
+            <div class="booking-slot">
+                <h4>Next Available: Trial Class</h4>
+                <div class="slot-details">
+                    <span>📅 Mon, Wed, Fri</span>
+                    <span class="slot-price">Check Pricing</span>
+                </div>
+            </div>
+
+            <button class="btn-pay" onclick="window.location.href='https://duke-city-fencing-club.gymdesk.com/book'">Continue to Payment</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA HACER FUNCIONAR EL MODAL -->
+    <script>
+        const modal = document.getElementById("bookingModal");
+        const openButtons = document.querySelectorAll(".open-booking");
+        const closeBtn = document.querySelector(".close-modal");
+
+        openButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                modal.style.display = "flex";
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>
