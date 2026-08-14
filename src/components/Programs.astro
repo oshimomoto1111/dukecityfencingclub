@@ -1,423 +1,351 @@
 ---
-// Programs Component - Modern Tabbed Interactive Showcase
+// Programs Component with Interactive Category Tabs, Transparent Pricing, and Menaul School Spotlight
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+const programs = [
+	{
+		id: "youth",
+		category: "youth",
+		badge: "Ages 6 – 9",
+		level: "Beginners & Mini Musketeers",
+		title: "Youth Fencing Class",
+		price: "$160",
+		period: "/month + tax",
+		trialInfo: "★ $10 Trial Class: Saturdays 9:45 AM – 10:30 AM",
+		trialBadge: "$10 Trial Available",
+		description: "The ideal starting point for young fencers. Engaging, high-energy classes focusing on agility, hand-eye coordination, blade safety, and fun fundamentals.",
+		schedules: [
+			{ days: "Mon & Wed", time: "4:30 PM – 6:00 PM" },
+			{ days: "Sat (Tournament)", time: "11:00 AM – 2:00 PM" },
+		],
+		features: [
+			"Full protective fencing gear provided for new students",
+			"Fundamental footwork, distance drills, and safety etiquette",
+			"Inclusive Saturday morning in-house practice tournaments",
+			"Coached by certified youth fencing instructors",
+		],
+		ctaText: "Book $10 Trial Class",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}foto-jovenes-1.jpg`,
+	},
+	{
+		id: "competitive",
+		category: "competitive",
+		badge: "Ages 10+",
+		level: "Intermediate & Advanced",
+		title: "Competitive Epee Program",
+		price: "$230",
+		period: "/month + tax",
+		trialInfo: "★ $10 Trial Session: Saturdays 12:30 PM – 1:15 PM",
+		trialBadge: "$10 Trial Available",
+		description: "Designed for ambitious athletes dedicated to regional (ROC/RYC) and national (NAC) tournament competition. Comprehensive tactical preparation and footwork.",
+		schedules: [
+			{ days: "Tue & Thu", time: "5:30 PM – 7:30 PM" },
+			{ days: "Mon – Thu", time: "Open Bouting (Included)" },
+			{ days: "Sat", time: "Conditioning & Tournament (10:30 AM – 1:00 PM)" },
+		],
+		features: [
+			"Unlimited Open Bouting included at no extra cost",
+			"High-intensity physical conditioning & bout analysis",
+			"Tournament coaching support & national ranking pathways",
+			"Directed by 3-Time Olympic Medalist Courtney Hurley",
+		],
+		ctaText: "Book Competitive Trial",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}foto-competitivo-1.jpg`,
+		featured: true,
+	},
+	{
+		id: "adults",
+		category: "adults",
+		badge: "Ages 16+",
+		level: "All Skill Levels",
+		title: "Adult Recreation Class",
+		price: "$140",
+		period: "/month + tax",
+		trialInfo: "★ $25 Trial & First Class: Mondays 6:30 PM",
+		trialBadge: "$25 Trial & Class",
+		description: "A premier cardiovascular workout, mental chess on the strip, and a welcoming adult community. Led by Coach Andy with a focus on recreation and Epee skills.",
+		schedules: [
+			{ days: "Mondays", time: "7:00 PM – 8:00 PM" },
+			{ days: "Sat (Tournament)", time: "11:00 AM – 2:00 PM" },
+		],
+		features: [
+			"Zero prior fencing experience required — gear provided",
+			"Full-body conditioning, agility, and tactical development",
+			"Friendly, collaborative, and social adult atmosphere",
+			"Access to Saturday club tournament bouts",
+		],
+		ctaText: "Book $25 Adult Trial",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}foto-adultos-1.jpg`,
+	},
+	{
+		id: "bouting",
+		category: "training",
+		badge: "Members & Visitors",
+		level: "Open Sparring",
+		title: "Open Bouting & Cross-Training",
+		price: "$140",
+		period: "/mo (or $20/day pass)",
+		trialInfo: "★ $35/mo as an add-on for Youth & Adult members",
+		trialBadge: "$20 Drop-In Available",
+		description: "Open floor sparring on full electric scoring strips. Test your tactics against diverse opponents and join Friday cross-training conditioning sessions.",
+		schedules: [
+			{ days: "Mon & Wed", time: "6:00 PM – 7:30 PM" },
+			{ days: "Tue & Thu", time: "6:30 PM – 7:30 PM" },
+			{ days: "Fridays", time: "Cross-Training / Conditioning" },
+		],
+		features: [
+			"Full electric scoring reels and grounded strips",
+			"Free for Competitive Program members",
+			"Drop-in visitors and traveling fencers welcome ($20/day)",
+			"Friday sport-specific athletic conditioning",
+		],
+		ctaText: "Get Day Pass / Register",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}foto-competitivo-2.jpg`,
+	},
+	{
+		id: "private",
+		category: "training",
+		badge: "Ages 6+",
+		level: "Individual 1-on-1",
+		title: "Private Coaching Lessons",
+		price: "$45",
+		period: "/lesson (4-Pack: $165)",
+		trialInfo: "★ Book directly on member portal",
+		trialBadge: "1-on-1 Coaching",
+		description: "One-on-one tailored instruction to rapidly accelerate technical mastery, blade work, point control, and customized competition strategies.",
+		schedules: [
+			{ days: "Mon – Sat", time: "By Appointment During Open Hours" },
+		],
+		features: [
+			"Dedicated 1-on-1 focus with senior coaching staff",
+			"Video review, technical correction, and tactile drills",
+			"Save with discounted 4-lesson bundle ($165 + tax)",
+			"Easy scheduling through the GymDesk member portal",
+		],
+		ctaText: "Schedule Private Lesson",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}foto-jovenes-2.jpg`,
+	},
+	{
+		id: "tournaments",
+		category: "training",
+		badge: "All Ages",
+		level: "Club Competition",
+		title: "Saturday Club Tournaments",
+		price: "Included",
+		period: "for club members",
+		trialInfo: "★ $20 for non-members / visitors",
+		trialBadge: "Every Non-Travel Saturday",
+		description: "Weekend competitive bouts grouped by age and skill. Experience authentic tournament bouting with real referees in a supportive club setting.",
+		schedules: [
+			{ days: "Saturdays", time: "11:00 AM – 1:00 PM / 2:00 PM" },
+		],
+		features: [
+			"Poule and Direct Elimination tournament formats",
+			"USA Fencing membership required (club membership optional)",
+			"Structured preparation for regional and national events",
+			"Held whenever the team is not traveling to national tournaments",
+		],
+		ctaText: "Register for Saturday Bouts",
+		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
+		img: `${base}courtney.jpg`,
+	},
+];
 ---
 
-<section class="programs-showcase-section" id="programs">
+<section class="programs-section" id="programs">
 	<div class="programs-container">
-
+		
 		<!-- Section Header -->
 		<div class="section-header">
-			<span class="section-kicker">Transparent Pricing & Programs</span>
-			<h2 class="section-title-custom">Choose Your Path on the Strip</h2>
+			<span class="section-kicker">World-Class Instruction</span>
+			<h2 class="section-title-custom">Training Programs & Pricing</h2>
 			<p class="section-subtitle">
-				Olympic-level instruction for every age, goal, and skill level. Select a program below to explore schedules, pricing, and trial classes.
+				From your very first trial class to national podium finishes. Transparent pricing, flexible schedules, and Olympic-caliber coaching for every age and skill level.
 			</p>
 		</div>
 
-		<!-- Interactive Segmented Tab Switcher -->
-		<div class="program-tab-nav" role="tablist" aria-label="Fencing Programs">
-			<button class="nav-tab active" data-target="panel-youth" role="tab" aria-selected="true" aria-controls="panel-youth">
-				<i class="fas fa-child"></i>
-				<span>Youth (6–9)</span>
-			</button>
-			<button class="nav-tab" data-target="panel-competitive" role="tab" aria-selected="false" aria-controls="panel-competitive">
-				<i class="fas fa-trophy"></i>
-				<span>Competitive (10+)</span>
-			</button>
-			<button class="nav-tab" data-target="panel-adults" role="tab" aria-selected="false" aria-controls="panel-adults">
-				<i class="fas fa-users"></i>
-				<span>Adults (16+)</span>
-			</button>
-			<button class="nav-tab" data-target="panel-bouting" role="tab" aria-selected="false" aria-controls="panel-bouting">
-				<i class="fas fa-bolt"></i>
-				<span>Open Bouting</span>
-			</button>
-			<button class="nav-tab" data-target="panel-private" role="tab" aria-selected="false" aria-controls="panel-private">
-				<i class="fas fa-bullseye"></i>
-				<span>Private & Events</span>
-			</button>
-			<button class="nav-tab tab-menaul" data-target="panel-menaul" role="tab" aria-selected="false" aria-controls="panel-menaul">
-				<i class="fas fa-graduation-cap"></i>
-				<span>Menaul School</span>
-			</button>
+		<!-- Interactive Category Filter Tabs -->
+		<div class="filter-tabs" role="tablist" aria-label="Program Categories">
+			<button class="tab-btn active" data-filter="all" role="tab" aria-selected="true">All Programs</button>
+			<button class="tab-btn" data-filter="youth" role="tab" aria-selected="false">Youth (Ages 6–9)</button>
+			<button class="tab-btn" data-filter="competitive" role="tab" aria-selected="false">Competitive (Ages 10+)</button>
+			<button class="tab-btn" data-filter="adults" role="tab" aria-selected="false">Adults (Ages 16+)</button>
+			<button class="tab-btn" data-filter="training" role="tab" aria-selected="false">Open Bouting & Lessons</button>
 		</div>
 
-		<!-- Showcase Showcase Display Container -->
-		<div class="showcase-content-wrapper">
-
-			<!-- PANEL 1: YOUTH (AGES 6-9) -->
-			<div class="showcase-panel active" id="panel-youth" role="tabpanel">
-				<div class="showcase-card">
-					<!-- Visual Column -->
-					<div class="showcase-visual">
-						<div class="visual-img" style={`background-image: url('${base}foto-jovenes-1.jpg');`}>
-							<span class="visual-badge">Ages 6 – 9</span>
+		<!-- Programs Grid -->
+		<div class="programs-grid" id="programsGrid">
+			{programs.map((prog) => (
+				<article class={`program-card-v2 ${prog.featured ? 'featured-card' : ''}`} data-category={prog.category}>
+					{prog.featured && <div class="featured-ribbon">Most Popular</div>}
+					
+					<!-- Card Header Image & Badges -->
+					<div class="card-image-wrap" style={`background-image: url('${prog.img}');`}>
+						<div class="card-image-overlay"></div>
+						<div class="card-top-badges">
+							<span class="badge-age">{prog.badge}</span>
+							<span class="badge-trial">{prog.trialBadge}</span>
 						</div>
-						<div class="visual-meta">
-							<div class="price-row">
-								<span class="price-amount">$160</span>
-								<span class="price-unit">/ month + tax</span>
+						<div class="card-header-title">
+							<span class="card-level">{prog.level}</span>
+							<h3>{prog.title}</h3>
+						</div>
+					</div>
+
+					<!-- Card Body -->
+					<div class="card-body">
+						<!-- Price Box -->
+						<div class="price-box">
+							<div class="price-main">
+								<span class="price-currency">{prog.price}</span>
+								<span class="price-period">{prog.period}</span>
 							</div>
-							<div class="trial-pill">
-								<i class="fas fa-tag"></i> <strong>$10 Trial Class:</strong> Saturdays 9:45 AM
+							<div class="trial-callout">
+								<i class="fas fa-tag"></i> {prog.trialInfo}
 							</div>
-							<button class="btn-showcase-primary open-booking" type="button">
-								Book $10 Trial Class <i class="fas fa-arrow-right"></i>
+						</div>
+
+						<p class="card-description">{prog.description}</p>
+
+						<!-- Schedules Block -->
+						<div class="schedule-block">
+							<div class="schedule-title"><i class="far fa-clock"></i> Class Schedule:</div>
+							<div class="schedule-chips">
+								{prog.schedules.map((sch) => (
+									<div class="schedule-chip">
+										<strong>{sch.days}:</strong> {sch.time}
+									</div>
+								))}
+							</div>
+						</div>
+
+						<!-- Features List -->
+						<ul class="features-list">
+							{prog.features.map((feat) => (
+								<li>
+									<i class="fas fa-check-circle"></i>
+									<span>{feat}</span>
+								</li>
+							))}
+						</ul>
+
+						<!-- CTA Button -->
+						<div class="card-cta-wrap">
+							<button class="btn-program-cta open-booking" type="button">
+								{prog.ctaText} <i class="fas fa-arrow-right"></i>
 							</button>
 						</div>
 					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge">Beginners & Mini Musketeers</div>
-						<h3>Youth Fencing Class</h3>
-						<p class="program-summary">
-							The ideal starting point for young champions. A high-energy, supportive environment where kids build agility, hand-eye coordination, mental focus, blade safety, and athletic confidence.
-						</p>
-
-						<!-- Clean Schedule Strip -->
-						<div class="schedule-strip">
-							<div class="schedule-tag">
-								<i class="far fa-clock"></i> <strong>Mon & Wed:</strong> 4:30 PM – 6:00 PM
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-medal"></i> <strong>Sat Tournament:</strong> 11:00 AM – 2:00 PM
-							</div>
-						</div>
-
-						<!-- Inclusions -->
-						<div class="inclusions-block">
-							<h4>What's Included:</h4>
-							<ul class="inclusions-list">
-								<li><i class="fas fa-check"></i> Complete protective gear & weapons provided for all new students</li>
-								<li><i class="fas fa-check"></i> Fundamental footwork, point control, and safety etiquette</li>
-								<li><i class="fas fa-check"></i> Free participation in weekly Saturday morning practice tournaments</li>
-								<li><i class="fas fa-check"></i> Certified youth coaching focused on positive sportsmanship</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- PANEL 2: COMPETITIVE (AGES 10+) -->
-			<div class="showcase-panel" id="panel-competitive" role="tabpanel">
-				<div class="showcase-card featured-border">
-					<!-- Visual Column -->
-					<div class="showcase-visual">
-						<div class="visual-img" style={`background-image: url('${base}foto-competitivo-1.jpg');`}>
-							<span class="visual-badge badge-red">Ages 10+ • Intermediate / Advanced</span>
-						</div>
-						<div class="visual-meta">
-							<div class="price-row">
-								<span class="price-amount">$230</span>
-								<span class="price-unit">/ month + tax</span>
-							</div>
-							<div class="trial-pill">
-								<i class="fas fa-tag"></i> <strong>$10 Trial Session:</strong> Saturdays 12:30 PM
-							</div>
-							<button class="btn-showcase-primary open-booking" type="button">
-								Book Competitive Trial <i class="fas fa-arrow-right"></i>
-							</button>
-						</div>
-					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge badge-popular">★ Most Popular Program</div>
-						<h3>Competitive Epee Program</h3>
-						<p class="program-summary">
-							Engineered for ambitious fencers dedicated to regional (ROC/RYC) and national (NAC) tournament podiums. Advanced tactical decision-making, athletic cross-conditioning, and tournament bouting.
-						</p>
-
-						<!-- Schedule Strip -->
-						<div class="schedule-strip">
-							<div class="schedule-tag">
-								<i class="far fa-clock"></i> <strong>Tue & Thu:</strong> 5:30 PM – 7:30 PM
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-bolt"></i> <strong>Mon–Thu:</strong> Open Bouting (Included Free)
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-dumbbell"></i> <strong>Sat:</strong> Conditioning (10:30 AM) & Tournaments
-							</div>
-						</div>
-
-						<!-- Inclusions -->
-						<div class="inclusions-block">
-							<h4>What's Included:</h4>
-							<ul class="inclusions-list">
-								<li><i class="fas fa-check"></i> Unlimited Open Bouting floor access with full electric scoring reels</li>
-								<li><i class="fas fa-check"></i> Directed by 3-Time Olympian & World Medalist Courtney Hurley</li>
-								<li><i class="fas fa-check"></i> Strategic bout video analysis and national ranking development</li>
-								<li><i class="fas fa-check"></i> National tournament coaching & collegiate NCAA recruiting pathway</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- PANEL 3: ADULTS (AGES 16+) -->
-			<div class="showcase-panel" id="panel-adults" role="tabpanel">
-				<div class="showcase-card">
-					<!-- Visual Column -->
-					<div class="showcase-visual">
-						<div class="visual-img" style={`background-image: url('${base}foto-adultos-1.jpg');`}>
-							<span class="visual-badge">Ages 16+ • All Levels</span>
-						</div>
-						<div class="visual-meta">
-							<div class="price-row">
-								<span class="price-amount">$140</span>
-								<span class="price-unit">/ month + tax</span>
-							</div>
-							<div class="trial-pill">
-								<i class="fas fa-tag"></i> <strong>$25 Intro & First Class:</strong> Mondays 6:30 PM
-							</div>
-							<button class="btn-showcase-primary open-booking" type="button">
-								Book $25 Adult Trial <i class="fas fa-arrow-right"></i>
-							</button>
-						</div>
-					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge">Fitness, Strategy & Community</div>
-						<h3>Adult Recreation Class</h3>
-						<p class="program-summary">
-							A premier cardiovascular workout and physical chess match on the strip. Led by Coach Andy, this class welcomes both complete adult beginners and experienced fencers looking for recreation and fitness.
-						</p>
-
-						<!-- Schedule Strip -->
-						<div class="schedule-strip">
-							<div class="schedule-tag">
-								<i class="far fa-clock"></i> <strong>Mondays:</strong> 7:00 PM – 8:00 PM (Intro 6:30 PM)
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-medal"></i> <strong>Saturdays:</strong> Club Tournaments 11:00 AM – 2:00 PM
-							</div>
-						</div>
-
-						<!-- Inclusions -->
-						<div class="inclusions-block">
-							<h4>What's Included:</h4>
-							<ul class="inclusions-list">
-								<li><i class="fas fa-check"></i> Zero experience needed — all protective gear and epees supplied</li>
-								<li><i class="fas fa-check"></i> High-calorie burn, core strengthening, and tactical agility drills</li>
-								<li><i class="fas fa-check"></i> Welcoming, social, and supportive adult fencing community</li>
-								<li><i class="fas fa-check"></i> Saturday tournament sparring and practice bouts included</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- PANEL 4: OPEN BOUTING -->
-			<div class="showcase-panel" id="panel-bouting" role="tabpanel">
-				<div class="showcase-card">
-					<!-- Visual Column -->
-					<div class="showcase-visual">
-						<div class="visual-img" style={`background-image: url('${base}foto-competitivo-2.jpg');`}>
-							<span class="visual-badge">Floor Access & Sparring</span>
-						</div>
-						<div class="visual-meta">
-							<div class="price-row">
-								<span class="price-amount">$140</span>
-								<span class="price-unit">/mo (or $20/day pass)</span>
-							</div>
-							<div class="trial-pill">
-								<i class="fas fa-plus-circle"></i> <strong>$35/mo Add-on</strong> for Youth & Adult Rec
-							</div>
-							<button class="btn-showcase-primary open-booking" type="button">
-								Get Day Pass / Register <i class="fas fa-arrow-right"></i>
-							</button>
-						</div>
-					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge">Electric Strips & Cross-Training</div>
-						<h3>Open Bouting & Cross-Training</h3>
-						<p class="program-summary">
-							Dedicated open floor time with electric scoring equipment to bout freely against diverse opponents, sharpen tactical instincts, and participate in Friday athletic conditioning.
-						</p>
-
-						<!-- Schedule Strip -->
-						<div class="schedule-strip">
-							<div class="schedule-tag">
-								<i class="far fa-clock"></i> <strong>Mon & Wed:</strong> 6:00 PM – 7:30 PM
-							</div>
-							<div class="schedule-tag">
-								<i class="far fa-clock"></i> <strong>Tue & Thu:</strong> 6:30 PM – 7:30 PM
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-dumbbell"></i> <strong>Fridays:</strong> Athletic Cross-Training
-							</div>
-						</div>
-
-						<!-- Inclusions -->
-						<div class="inclusions-block">
-							<h4>What's Included:</h4>
-							<ul class="inclusions-list">
-								<li><i class="fas fa-check"></i> Full electric scoring machines and grounded fencing strips</li>
-								<li><i class="fas fa-check"></i> Included completely free for Competitive Program members</li>
-								<li><i class="fas fa-check"></i> Visiting and traveling fencers always welcome with $20 daily drop-in</li>
-								<li><i class="fas fa-check"></i> Friday fencing-specific strength & conditioning workouts</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- PANEL 5: PRIVATE LESSONS & TOURNAMENTS -->
-			<div class="showcase-panel" id="panel-private" role="tabpanel">
-				<div class="showcase-card">
-					<!-- Visual Column -->
-					<div class="showcase-visual">
-						<div class="visual-img" style={`background-image: url('${base}foto-jovenes-2.jpg');`}>
-							<span class="visual-badge">Ages 6+ • 1-on-1 Mastery</span>
-						</div>
-						<div class="visual-meta">
-							<div class="price-row">
-								<span class="price-amount">$45</span>
-								<span class="price-unit">/ lesson</span>
-							</div>
-							<div class="trial-pill">
-								<i class="fas fa-box-open"></i> <strong>4-Lesson Pack:</strong> $165 + tax (Save $15)
-							</div>
-							<button class="btn-showcase-primary open-booking" type="button">
-								Book Private Lesson <i class="fas fa-arrow-right"></i>
-							</button>
-						</div>
-					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge">Personalized Coaching & Weekend Bouts</div>
-						<h3>Private Lessons & Club Tournaments</h3>
-						<p class="program-summary">
-							Accelerate individual technical mastery, hand speed, and tactical game planning with dedicated 1-on-1 coaching sessions, plus real tournament practice every Saturday.
-						</p>
-
-						<!-- Schedule Strip -->
-						<div class="schedule-strip">
-							<div class="schedule-tag">
-								<i class="far fa-calendar-alt"></i> <strong>Private Lessons:</strong> Mon–Sat by Appointment
-							</div>
-							<div class="schedule-tag">
-								<i class="fas fa-trophy"></i> <strong>Saturday Tournaments:</strong> 11:00 AM ($20 non-members)
-							</div>
-						</div>
-
-						<!-- Inclusions -->
-						<div class="inclusions-block">
-							<h4>What's Included:</h4>
-							<ul class="inclusions-list">
-								<li><i class="fas fa-check"></i> 1-on-1 blade precision, distance calibration, and tactical drilling</li>
-								<li><i class="fas fa-check"></i> Customized tournament preparation tailored to your fencing style</li>
-								<li><i class="fas fa-check"></i> Easy online booking and package management through GymDesk portal</li>
-								<li><i class="fas fa-check"></i> Saturday poule & direct elimination tournament matches</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- PANEL 6: MENAUL SCHOOL PARTNERSHIP -->
-			<div class="showcase-panel" id="panel-menaul" role="tabpanel">
-				<div class="showcase-card menaul-theme-card">
-					<!-- Visual Column -->
-					<div class="showcase-visual menaul-visual">
-						<div class="visual-img" style={`background-image: url('${base}courtney.jpg');`}>
-							<span class="visual-badge badge-gold">Grades 6–12 • Residential & Day</span>
-						</div>
-						<div class="visual-meta">
-							<div class="menaul-director-tag">
-								<strong>Courtney Hurley</strong>
-								<span>3x Olympian • Olympic Medalist • 2x NCAA Champion</span>
-							</div>
-							<div class="menaul-btn-stack">
-								<a href="https://www.menaulschool.org/admission/apply/" target="_blank" rel="noopener noreferrer" class="btn-showcase-primary btn-menaul-primary">
-									Apply to Menaul School <i class="fas fa-external-link-alt"></i>
-								</a>
-								<a href="https://www.menaulschool.org/wp-content/uploads/sites/51/2025/11/Fencingv3-final.pdf" target="_blank" rel="noopener noreferrer" class="btn-menaul-outline">
-									<i class="fas fa-file-pdf"></i> Download Brochure
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Details Column -->
-					<div class="showcase-details">
-						<div class="program-type-badge badge-menaul">🎓 Fencing – Find Your Edge</div>
-						<h3>Menaul School Panther Fencing Academy</h3>
-						<p class="program-summary">
-							The <strong>first high school residential & day fencing program in the USA</strong>. Students receive elite daily training 5 days a week directly under Olympic Medalist Courtney Hurley integrated into their college-prep school day.
-						</p>
-
-						<!-- 4 Mini Pillar Cards -->
-						<div class="menaul-mini-grid">
-							<div class="mini-pillar">
-								<i class="fas fa-graduation-cap"></i>
-								<div>
-									<strong>NCAA D1 & Ivy League Pathway</strong>
-									<span>Recruitment pipeline to Stanford, Notre Dame, Harvard, Princeton</span>
-								</div>
-							</div>
-							<div class="mini-pillar">
-								<i class="fas fa-clock"></i>
-								<div>
-									<strong>Flexible Academic Schedule</strong>
-									<span>Rigorous curriculum structured around daily training and ROC/NAC travel</span>
-								</div>
-							</div>
-							<div class="mini-pillar">
-								<i class="fas fa-mountain"></i>
-								<div>
-									<strong>High-Altitude Advantage</strong>
-									<span>Mile-high (5,312 ft) cardiovascular endurance training edge</span>
-								</div>
-							</div>
-							<div class="mini-pillar">
-								<i class="fas fa-award"></i>
-								<div>
-									<strong>Tuition-Free NM Universities</strong>
-									<span>Qualify for NM Lottery Scholarship for 100% tuition at UNM</span>
-								</div>
-							</div>
-						</div>
-
-						<!-- Direct Info -->
-						<div class="menaul-footnote">
-							<span><i class="fas fa-bed"></i> <strong>Boarding:</strong> On-campus dorms</span>
-							<span><i class="fas fa-school"></i> <strong>Day School:</strong> Local NM students</span>
-							<span><i class="fas fa-envelope"></i> <strong>Director:</strong> <a href="mailto:CHurley@menaulschool.org">CHurley@menaulschool.org</a></span>
-						</div>
-					</div>
-				</div>
-			</div>
-
+				</article>
+			))}
 		</div>
 
-		<!-- Sleek Minimalist Discounts Strip -->
-		<div class="discounts-compact-strip">
-			<div class="discounts-compact-label">
-				<i class="fas fa-tags"></i>
-				<span>Member Perks & Discounts:</span>
+		<!-- ========================================================
+		     SPECIAL SPOTLIGHT: MENAUL SCHOOL PARTNERSHIP
+		     ======================================================== -->
+		<div class="menaul-spotlight" id="menaul">
+			<div class="menaul-spotlight-inner">
+				<div class="menaul-header">
+					<div class="menaul-badge">
+						<i class="fas fa-graduation-cap"></i> Fencing – Find Your Edge • Grades 6–12
+					</div>
+					<h3>Menaul School Panther Fencing Academy</h3>
+					<p class="menaul-lead">
+						A ground-breaking athletic and academic partnership offering the <strong>first high school residential & day-school fencing program in the United States</strong>. Students train 5 days a week directly under Program Director <strong>Courtney Hurley</strong> — <em>3x Olympian, London 2012 Bronze Medalist, 2x NCAA Champion (Notre Dame), and certified Fencing Master</em>.
+					</p>
+				</div>
+
+				<!-- 4 Pillar Cards -->
+				<div class="menaul-pillars-grid">
+					<div class="pillar-card">
+						<div class="pillar-icon"><i class="fas fa-trophy"></i></div>
+						<h4>NCAA Division I & Ivy League Pathway</h4>
+						<p>
+							Strategic tournament coaching and collegiate networking for recruitment into Division I fencing powerhouses (Notre Dame, Stanford, Penn State, Ohio State) and Ivy League admissions (Harvard, Princeton, Columbia, Yale).
+						</p>
+					</div>
+
+					<div class="pillar-card">
+						<div class="pillar-icon"><i class="fas fa-calendar-check"></i></div>
+						<h4>Tailored Flexible Academic Schedule</h4>
+						<p>
+							Menaul School provides a rigorous college-preparatory curriculum structured around intensive daily training and national travel for ROC/NAC competitions without compromising academic excellence.
+						</p>
+					</div>
+
+					<div class="pillar-card">
+						<div class="pillar-icon"><i class="fas fa-mountain"></i></div>
+						<h4>High-Altitude Training Advantage</h4>
+						<p>
+							Albuquerque’s mile-high elevation (5,312 ft) provides a natural cardiovascular endurance boost, giving our fencers a distinct physical edge on the national and world championship strip.
+						</p>
+					</div>
+
+					<div class="pillar-card">
+						<div class="pillar-icon"><i class="fas fa-award"></i></div>
+						<h4>Tuition-Free NM Public Universities</h4>
+						<p>
+							Menaul School graduates qualify for the <em>New Mexico Lottery Scholarship</em>, granting tuition-free access to top state universities like the University of New Mexico (UNM) — applicable even for out-of-state families!
+						</p>
+					</div>
+				</div>
+
+				<!-- Menaul Options & CTA -->
+				<div class="menaul-footer-bar">
+					<div class="menaul-format-info">
+						<span><i class="fas fa-building"></i> <strong>Boarding & Residential:</strong> Full campus dormitories</span>
+						<span><i class="fas fa-sun"></i> <strong>Day-School:</strong> Open to local NM students</span>
+						<span><i class="fas fa-envelope"></i> <strong>Director:</strong> <a href="mailto:CHurley@menaulschool.org" style="color: var(--gold); text-decoration: underline;">CHurley@menaulschool.org</a></span>
+					</div>
+					<div class="menaul-actions-group">
+						<a href="https://www.menaulschool.org/wp-content/uploads/sites/51/2025/11/Fencingv3-final.pdf" target="_blank" rel="noopener noreferrer" class="btn-menaul-secondary">
+							<i class="fas fa-file-pdf"></i> Download Brochure
+						</a>
+						<a href="https://www.menaulschool.org/admission/apply/" target="_blank" rel="noopener noreferrer" class="btn-menaul-cta">
+							Apply to Menaul School <i class="fas fa-external-link-alt"></i>
+						</a>
+					</div>
+				</div>
 			</div>
-			<div class="discounts-compact-items">
-				<div class="compact-disc-item">
-					<span class="disc-pct">25% OFF</span>
-					<span class="disc-txt">Sibling & Family</span>
+		</div>
+
+		<!-- ========================================================
+		     DISCOUNTS & COMMUNITY SAVINGS BANNER
+		     ======================================================== -->
+		<div class="discounts-banner">
+			<div class="discounts-header">
+				<i class="fas fa-tags discount-icon"></i>
+				<div>
+					<h4>Community & Family Discounts</h4>
+					<p>We are proud to make the sport of fencing accessible and rewarding for Albuquerque families and service members.</p>
 				</div>
-				<div class="compact-disc-divider">•</div>
-				<div class="compact-disc-item">
-					<span class="disc-pct">10% OFF</span>
-					<span class="disc-txt">Active Military & Veterans</span>
+			</div>
+			<div class="discounts-grid">
+				<div class="discount-item">
+					<div class="discount-percent">25% OFF</div>
+					<div class="discount-label">
+						<strong>Sibling & Family Discount</strong>
+						<span>Applied to the 2nd and subsequent enrolled family members</span>
+					</div>
 				</div>
-				<div class="compact-disc-divider">•</div>
-				<div class="compact-disc-item">
-					<span class="disc-pct">10% OFF</span>
-					<span class="disc-txt">College Students</span>
+				<div class="discount-item">
+					<div class="discount-percent">10% OFF</div>
+					<div class="discount-label">
+						<strong>Active Military & Veterans</strong>
+						<span>Honoring our service members and their immediate families</span>
+					</div>
+				</div>
+				<div class="discount-item">
+					<div class="discount-percent">10% OFF</div>
+					<div class="discount-label">
+						<strong>College Students</strong>
+						<span>Valid with current university or college student ID</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -426,21 +354,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 </section>
 
 <style>
-	.programs-showcase-section {
+	.programs-section {
 		padding: var(--section-padding);
 		background-color: var(--bg-cream);
 	}
 
 	.programs-container {
-		max-width: 1200px;
+		max-width: 1280px;
 		margin: 0 auto;
 	}
 
 	/* Section Header */
 	.section-header {
 		text-align: center;
-		max-width: 760px;
-		margin: 0 auto 2.5rem;
+		max-width: 800px;
+		margin: 0 auto 3.5rem;
 	}
 
 	.section-kicker {
@@ -454,621 +382,640 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 	}
 
 	.section-title-custom {
-		font-size: 2.6rem;
+		font-size: 2.75rem;
 		color: var(--primary-green);
-		margin-bottom: 0.85rem;
+		margin-bottom: 1rem;
 		line-height: 1.15;
 	}
 
 	.section-subtitle {
-		font-size: 1.05rem;
+		font-size: 1.1rem;
 		color: var(--text-dark);
-		opacity: 0.85;
-		line-height: 1.55;
+		opacity: 0.88;
+		line-height: 1.6;
 	}
 
-	/* Interactive Segmented Tab Nav */
-	.program-tab-nav {
+	/* Category Filter Tabs */
+	.filter-tabs {
 		display: flex;
 		justify-content: center;
-		gap: 0.6rem;
+		gap: 0.75rem;
 		flex-wrap: wrap;
-		margin-bottom: 2rem;
-		background: #fff;
-		padding: 0.5rem;
-		border-radius: 50px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-		border: 1px solid rgba(0, 59, 43, 0.1);
-		max-width: 1050px;
-		margin-left: auto;
-		margin-right: auto;
+		margin-bottom: 3.5rem;
 	}
 
-	.nav-tab {
-		background: transparent;
+	.tab-btn {
+		background-color: #fff;
 		color: var(--text-dark);
-		border: none;
-		padding: 0.75rem 1.4rem;
+		border: 2px solid rgba(0, 59, 43, 0.15);
+		padding: 0.65rem 1.4rem;
 		border-radius: 50px;
 		font-family: var(--font-headings);
 		font-weight: 700;
-		font-size: 0.9rem;
+		font-size: 0.88rem;
 		cursor: pointer;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-		opacity: 0.8;
+		transition: all 0.25s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 	}
 
-	.nav-tab i {
-		font-size: 0.95rem;
+	.tab-btn:hover {
+		border-color: var(--primary-green);
 		color: var(--primary-green);
-		transition: color 0.25s ease;
+		transform: translateY(-2px);
 	}
 
-	.nav-tab:hover {
-		opacity: 1;
-		background-color: rgba(0, 59, 43, 0.06);
-	}
-
-	.nav-tab.active {
+	.tab-btn.active {
 		background-color: var(--primary-green);
 		color: #fff;
-		opacity: 1;
-		box-shadow: 0 4px 12px rgba(0, 59, 43, 0.3);
+		border-color: var(--primary-green);
+		box-shadow: 0 6px 15px rgba(0, 59, 43, 0.25);
 	}
 
-	.nav-tab.active i {
-		color: var(--gold);
-	}
-
-	.nav-tab.tab-menaul.active {
-		background: linear-gradient(135deg, var(--primary-green) 0%, #002b1f 100%);
-		border: 1px solid var(--gold);
-	}
-
-	/* Showcase Container */
-	.showcase-content-wrapper {
-		margin-bottom: 2.5rem;
-		position: relative;
-	}
-
-	.showcase-panel {
-		display: none;
-		animation: fadeInSlide 0.35s ease-out forwards;
-	}
-
-	.showcase-panel.active {
-		display: block;
-	}
-
-	@keyframes fadeInSlide {
-		from {
-			opacity: 0;
-			transform: translateY(12px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Showcase Card - 2 Columns */
-	.showcase-card {
-		background: #fff;
-		border-radius: 16px;
-		overflow: hidden;
-		box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-		border: 1px solid rgba(0, 59, 43, 0.1);
+	/* Programs Grid */
+	.programs-grid {
 		display: grid;
-		grid-template-columns: 420px 1fr;
-		min-height: 480px;
+		grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+		gap: 2.5rem;
+		margin-bottom: 5rem;
 	}
 
-	.showcase-card.featured-border {
-		border: 2px solid var(--accent-red);
-		box-shadow: 0 15px 40px rgba(226, 10, 23, 0.12);
-	}
-
-	/* Left Visual Column */
-	.showcase-visual {
-		background: #0f241a;
+	.program-card-v2 {
+		background: #fff;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 59, 43, 0.1);
 		display: flex;
 		flex-direction: column;
-		color: #fff;
+		transition: transform 0.35s ease, box-shadow 0.35s ease;
 		position: relative;
 	}
 
-	.visual-img {
-		height: 240px;
+	.program-card-v2:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+	}
+
+	.program-card-v2.featured-card {
+		border: 2px solid var(--accent-red);
+		box-shadow: 0 12px 35px rgba(226, 10, 23, 0.15);
+	}
+
+	.featured-ribbon {
+		position: absolute;
+		top: 15px;
+		right: -32px;
+		background-color: var(--accent-red);
+		color: #fff;
+		font-size: 0.72rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 0.35rem 2.5rem;
+		transform: rotate(45deg);
+		z-index: 10;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+	}
+
+	/* Card Image Header */
+	.card-image-wrap {
+		height: 200px;
 		background-size: cover;
 		background-position: center;
 		position: relative;
 		display: flex;
-		align-items: flex-start;
+		flex-direction: column;
+		justify-content: space-between;
 		padding: 1.25rem;
+		color: #fff;
 	}
 
-	.visual-img::after {
-		content: '';
+	.card-image-overlay {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(15, 36, 26, 0.9) 100%);
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 30, 20, 0.92) 100%);
+		z-index: 1;
 	}
 
-	.visual-badge {
+	.card-top-badges {
 		position: relative;
 		z-index: 2;
-		background: rgba(0, 59, 43, 0.9);
-		backdrop-filter: blur(8px);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.badge-age {
+		background: rgba(0, 59, 43, 0.85);
+		backdrop-filter: blur(6px);
 		color: #fff;
-		font-size: 0.78rem;
+		font-size: 0.75rem;
 		font-weight: 800;
-		padding: 0.35rem 0.85rem;
+		padding: 0.3rem 0.75rem;
 		border-radius: 50px;
 		border: 1px solid rgba(255, 255, 255, 0.3);
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 	}
 
-	.badge-red {
-		background: var(--accent-red);
-		border-color: rgba(255, 255, 255, 0.4);
-	}
-
-	.badge-gold {
+	.badge-trial {
 		background: var(--gold);
 		color: var(--text-dark);
-		border: none;
-	}
-
-	.visual-meta {
-		padding: 1.75rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex-grow: 1;
-		gap: 1.25rem;
-		background: #0f241a;
-	}
-
-	.price-row {
-		display: flex;
-		align-items: baseline;
-		gap: 0.4rem;
-	}
-
-	.price-amount {
-		font-size: 2.5rem;
-		font-weight: 900;
-		font-family: var(--font-headings);
-		color: var(--gold);
-		line-height: 1;
-	}
-
-	.price-unit {
-		font-size: 0.95rem;
-		color: rgba(255, 255, 255, 0.75);
-		font-weight: 600;
-	}
-
-	.trial-pill {
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		padding: 0.65rem 1rem;
-		border-radius: 8px;
-		font-size: 0.88rem;
-		color: #eee;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.trial-pill i {
-		color: var(--gold);
-	}
-
-	.trial-pill strong {
-		color: #fff;
-	}
-
-	.btn-showcase-primary {
-		width: 100%;
-		background-color: var(--accent-red);
-		color: #fff;
-		padding: 0.95rem 1.25rem;
-		border-radius: var(--border-radius);
-		font-family: var(--font-headings);
+		font-size: 0.72rem;
 		font-weight: 800;
-		font-size: 0.92rem;
+		padding: 0.3rem 0.75rem;
+		border-radius: 50px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.card-header-title {
+		position: relative;
+		z-index: 2;
+	}
+
+	.card-level {
+		font-size: 0.78rem;
+		color: var(--gold);
+		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 1px;
-		border: none;
-		cursor: pointer;
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.6rem;
-		transition: all 0.25s ease;
-		box-shadow: 0 4px 15px rgba(226, 10, 23, 0.4);
-		text-decoration: none;
+		display: block;
+		margin-bottom: 0.25rem;
 	}
 
-	.btn-showcase-primary:hover {
-		background-color: var(--accent-red-hover);
-		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgba(226, 10, 23, 0.55);
+	.card-header-title h3 {
+		font-size: 1.45rem;
 		color: #fff;
-	}
-
-	/* Right Details Column */
-	.showcase-details {
-		padding: 2.5rem 3rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.program-type-badge {
-		font-size: 0.8rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		color: var(--primary-green);
-		margin-bottom: 0.5rem;
-	}
-
-	.badge-popular {
-		color: var(--accent-red);
-	}
-
-	.badge-menaul {
-		color: var(--primary-green);
-		font-weight: 800;
-	}
-
-	.showcase-details h3 {
-		font-size: 2.1rem;
-		color: var(--primary-green);
-		margin-bottom: 1rem;
+		margin: 0;
 		line-height: 1.2;
 	}
 
-	.program-summary {
-		font-size: 1.02rem;
+	/* Card Body */
+	.card-body {
+		padding: 1.75rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.price-box {
+		background-color: rgba(0, 59, 43, 0.05);
+		border-radius: 8px;
+		padding: 1rem 1.25rem;
+		margin-bottom: 1.25rem;
+		border-left: 4px solid var(--primary-green);
+	}
+
+	.featured-card .price-box {
+		border-left-color: var(--accent-red);
+		background-color: rgba(226, 10, 23, 0.05);
+	}
+
+	.price-main {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.price-currency {
+		font-size: 1.85rem;
+		font-weight: 900;
+		font-family: var(--font-headings);
+		color: var(--primary-green);
+		line-height: 1;
+	}
+
+	.price-period {
+		font-size: 0.9rem;
+		color: #555;
+		font-weight: 600;
+	}
+
+	.trial-callout {
+		font-size: 0.82rem;
+		color: var(--accent-red);
+		font-weight: 700;
+	}
+
+	.card-description {
+		font-size: 0.92rem;
 		color: var(--text-dark);
-		opacity: 0.9;
-		line-height: 1.6;
+		opacity: 0.88;
+		line-height: 1.55;
 		margin-bottom: 1.5rem;
 	}
 
-	/* Schedule Strip */
-	.schedule-strip {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-bottom: 1.75rem;
-	}
-
-	.schedule-tag {
-		background: var(--bg-cream);
-		border: 1px solid rgba(0, 59, 43, 0.12);
-		padding: 0.55rem 1rem;
+	/* Schedules */
+	.schedule-block {
+		background: #fafafa;
+		border: 1px solid #eaeaea;
 		border-radius: 8px;
-		font-size: 0.86rem;
-		color: #333;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
+		padding: 0.85rem 1rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.schedule-tag i {
-		color: var(--primary-green);
-	}
-
-	.schedule-tag strong {
-		color: var(--primary-green);
-	}
-
-	/* Inclusions Block */
-	.inclusions-block h4 {
-		font-size: 0.88rem;
+	.schedule-title {
+		font-size: 0.78rem;
+		font-weight: 800;
 		text-transform: uppercase;
-		letter-spacing: 1px;
-		color: #666;
-		margin-bottom: 0.75rem;
+		color: var(--primary-green);
+		letter-spacing: 0.5px;
+		margin-bottom: 0.5rem;
 	}
 
-	.inclusions-list {
-		list-style: none;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 0.65rem 1.5rem;
-	}
-
-	.inclusions-list li {
+	.schedule-chips {
 		display: flex;
-		align-items: flex-start;
-		gap: 0.6rem;
-		font-size: 0.9rem;
-		color: #444;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.schedule-chip {
+		font-size: 0.84rem;
+		color: #333;
 		line-height: 1.4;
 	}
 
-	.inclusions-list i {
+	.schedule-chip strong {
 		color: var(--primary-green);
-		margin-top: 0.2rem;
-		flex-shrink: 0;
 	}
 
-	/* ========================================================
-	   MENAUL SCHOOL SPECIAL STYLING INSIDE SHOWCASE
-	   ======================================================== */
-	.menaul-theme-card {
-		border: 2px solid rgba(212, 175, 55, 0.4);
-		background: #fff;
-	}
-
-	.menaul-visual {
-		background: linear-gradient(180deg, #0f241a 0%, #001a12 100%);
-	}
-
-	.menaul-director-tag {
-		background: rgba(255, 255, 255, 0.08);
-		border-left: 3px solid var(--gold);
-		padding: 0.75rem 1rem;
-		border-radius: 4px;
-	}
-
-	.menaul-director-tag strong {
-		display: block;
-		color: var(--gold);
-		font-size: 0.95rem;
-	}
-
-	.menaul-director-tag span {
-		font-size: 0.78rem;
-		color: #ccc;
-		display: block;
-	}
-
-	.menaul-btn-stack {
+	/* Features */
+	.features-list {
+		list-style: none;
+		margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.65rem;
+		flex-grow: 1;
 	}
 
-	.btn-menaul-primary {
-		background: var(--accent-red);
-	}
-
-	.btn-menaul-outline {
-		background: transparent;
-		color: #fff;
-		border: 1px solid rgba(255, 255, 255, 0.35);
-		padding: 0.8rem 1rem;
-		border-radius: var(--border-radius);
-		font-family: var(--font-headings);
-		font-weight: 700;
-		font-size: 0.84rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.5rem;
-		text-decoration: none;
-		transition: all 0.25s ease;
-	}
-
-	.btn-menaul-outline:hover {
-		background: rgba(255, 255, 255, 0.15);
-		border-color: #fff;
-		color: #fff;
-	}
-
-	.menaul-mini-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.mini-pillar {
-		background: var(--bg-cream);
-		border: 1px solid rgba(0, 59, 43, 0.08);
-		border-radius: 8px;
-		padding: 1rem;
+	.features-list li {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.75rem;
+		gap: 0.6rem;
+		font-size: 0.88rem;
+		color: #444;
+		line-height: 1.45;
 	}
 
-	.mini-pillar i {
-		font-size: 1.25rem;
+	.features-list i {
 		color: var(--primary-green);
+		font-size: 0.95rem;
 		margin-top: 0.15rem;
 		flex-shrink: 0;
 	}
 
-	.mini-pillar strong {
-		display: block;
-		font-size: 0.88rem;
-		color: var(--primary-green);
-		margin-bottom: 0.2rem;
-		line-height: 1.25;
+	.card-cta-wrap {
+		margin-top: auto;
 	}
 
-	.mini-pillar span {
-		font-size: 0.78rem;
+	.btn-program-cta {
+		width: 100%;
+		background-color: var(--accent-red);
+		color: #fff;
+		padding: 0.9rem 1.25rem;
+		border-radius: var(--border-radius);
+		font-family: var(--font-headings);
+		font-weight: 800;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		border: none;
+		cursor: pointer;
+		transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+		letter-spacing: 1px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+		box-shadow: 0 4px 12px rgba(226, 10, 23, 0.35);
+	}
+
+	.btn-program-cta:hover {
+		background-color: var(--accent-red-hover);
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(226, 10, 23, 0.5);
+	}
+
+	/* ========================================================
+	   MENAUL SCHOOL PARTNERSHIP SPOTLIGHT
+	   ======================================================== */
+	.menaul-spotlight {
+		background: linear-gradient(135deg, var(--primary-green) 0%, #002218 100%);
+		color: #fff;
+		border-radius: 16px;
+		padding: 4rem 3rem;
+		margin-bottom: 5rem;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 20px 50px rgba(0, 59, 43, 0.35);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+	}
+
+	.menaul-spotlight::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		right: -20%;
+		width: 600px;
+		height: 600px;
+		background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+		pointer-events: none;
+	}
+
+	.menaul-spotlight-inner {
+		position: relative;
+		z-index: 2;
+	}
+
+	.menaul-header {
+		text-align: center;
+		max-width: 900px;
+		margin: 0 auto 3.5rem;
+	}
+
+	.menaul-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		background: rgba(212, 175, 55, 0.2);
+		border: 1px solid var(--gold);
+		color: var(--gold);
+		padding: 0.45rem 1.25rem;
+		border-radius: 50px;
+		font-size: 0.82rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		margin-bottom: 1.25rem;
+	}
+
+	.menaul-header h3 {
+		font-size: 2.5rem;
+		color: var(--bg-cream);
+		margin-bottom: 1.25rem;
+		line-height: 1.2;
+	}
+
+	.menaul-lead {
+		font-size: 1.15rem;
+		line-height: 1.7;
+		opacity: 0.95;
+		color: #eee;
+	}
+
+	.menaul-lead strong {
+		color: var(--gold);
+	}
+
+	.menaul-pillars-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+		margin-bottom: 3.5rem;
+	}
+
+	.pillar-card {
+		background: rgba(255, 255, 255, 0.06);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 12px;
+		padding: 2rem 1.5rem;
+		transition: transform 0.3s ease, background 0.3s ease;
+	}
+
+	.pillar-card:hover {
+		transform: translateY(-5px);
+		background: rgba(255, 255, 255, 0.1);
+		border-color: var(--gold);
+	}
+
+	.pillar-icon {
+		font-size: 2rem;
+		color: var(--gold);
+		margin-bottom: 1.25rem;
+	}
+
+	.pillar-card h4 {
+		font-size: 1.15rem;
+		color: var(--bg-cream);
+		margin-bottom: 0.75rem;
+		line-height: 1.3;
+	}
+
+	.pillar-card p {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		opacity: 0.88;
+	}
+
+	.menaul-footer-bar {
+		background: rgba(0, 0, 0, 0.35);
+		border-radius: 10px;
+		padding: 1.5rem 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.menaul-format-info {
+		display: flex;
+		gap: 2rem;
+		flex-wrap: wrap;
+		font-size: 0.95rem;
+	}
+
+	.menaul-format-info span {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.menaul-format-info i {
+		color: var(--gold);
+	}
+
+	.menaul-actions-group {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.btn-menaul-secondary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		background-color: rgba(255, 255, 255, 0.12);
+		color: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		padding: 0.85rem 1.4rem;
+		border-radius: var(--border-radius);
+		font-family: var(--font-headings);
+		font-weight: 700;
+		font-size: 0.88rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		transition: all 0.25s ease;
+	}
+
+	.btn-menaul-secondary:hover {
+		background-color: rgba(255, 255, 255, 0.25);
+		border-color: #fff;
+		transform: translateY(-2px);
+		color: #fff;
+	}
+
+	.btn-menaul-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		background-color: var(--accent-red);
+		color: #fff;
+		padding: 0.85rem 1.75rem;
+		border-radius: var(--border-radius);
+		font-family: var(--font-headings);
+		font-weight: 800;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		transition: background 0.3s, transform 0.2s;
+		box-shadow: 0 4px 15px rgba(226, 10, 23, 0.4);
+	}
+
+	.btn-menaul-cta:hover {
+		background-color: var(--accent-red-hover);
+		transform: translateY(-2px);
+		color: #fff;
+	}
+
+	/* ========================================================
+	     DISCOUNTS BANNER
+	   ======================================================== */
+	.discounts-banner {
+		background-color: #fff;
+		border-radius: 16px;
+		padding: 3rem 2.5rem;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 59, 43, 0.12);
+	}
+
+	.discounts-header {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		margin-bottom: 2.5rem;
+	}
+
+	.discount-icon {
+		font-size: 2.5rem;
+		color: var(--accent-red);
+	}
+
+	.discounts-header h4 {
+		font-size: 1.75rem;
+		color: var(--primary-green);
+		margin-bottom: 0.35rem;
+	}
+
+	.discounts-header p {
+		font-size: 0.95rem;
+		color: #555;
+	}
+
+	.discounts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.discount-item {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		background: var(--bg-cream);
+		padding: 1.5rem;
+		border-radius: 10px;
+		border-left: 5px solid var(--gold);
+	}
+
+	.discount-percent {
+		font-size: 1.6rem;
+		font-weight: 900;
+		font-family: var(--font-headings);
+		color: var(--primary-green);
+		white-space: nowrap;
+	}
+
+	.discount-label strong {
+		display: block;
+		font-size: 0.95rem;
+		color: var(--primary-green);
+		margin-bottom: 0.2rem;
+	}
+
+	.discount-label span {
+		font-size: 0.82rem;
 		color: #666;
 		line-height: 1.35;
 		display: block;
 	}
 
-	.menaul-footnote {
-		display: flex;
-		gap: 1.5rem;
-		flex-wrap: wrap;
-		font-size: 0.84rem;
-		color: #555;
-		border-top: 1px solid #eee;
-		padding-top: 1rem;
-	}
-
-	.menaul-footnote i {
-		color: var(--primary-green);
-	}
-
-	.menaul-footnote a {
-		color: var(--primary-green);
-		font-weight: 700;
-		text-decoration: underline;
-	}
-
-	/* ========================================================
-	   COMPACT MINIMALIST DISCOUNTS STRIP
-	   ======================================================== */
-	.discounts-compact-strip {
-		background: #fff;
-		border-radius: 50px;
-		padding: 1rem 2rem;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-		border: 1px solid rgba(0, 59, 43, 0.1);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		flex-wrap: wrap;
-	}
-
-	.discounts-compact-label {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-family: var(--font-headings);
-		font-weight: 800;
-		font-size: 0.88rem;
-		color: var(--primary-green);
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.discounts-compact-label i {
-		color: var(--accent-red);
-		font-size: 1.1rem;
-	}
-
-	.discounts-compact-items {
-		display: flex;
-		align-items: center;
-		gap: 1.25rem;
-		flex-wrap: wrap;
-	}
-
-	.compact-disc-item {
-		display: flex;
-		align-items: center;
-		gap: 0.45rem;
-	}
-
-	.disc-pct {
-		background: var(--gold);
-		color: var(--text-dark);
-		font-weight: 900;
-		font-size: 0.78rem;
-		padding: 0.2rem 0.55rem;
-		border-radius: 4px;
-		font-family: var(--font-headings);
-	}
-
-	.disc-txt {
-		font-size: 0.88rem;
-		color: #444;
-		font-weight: 600;
-	}
-
-	.compact-disc-divider {
-		color: #ccc;
-		font-weight: 900;
-	}
-
-	/* Responsive Styles */
-	@media (max-width: 992px) {
-		.showcase-card {
-			grid-template-columns: 1fr;
-		}
-		.showcase-visual {
-			min-height: auto;
-		}
-		.visual-img {
-			height: 200px;
-		}
-		.showcase-details {
-			padding: 2rem 1.5rem;
-		}
-		.menaul-mini-grid {
-			grid-template-columns: 1fr;
-		}
-		.program-tab-nav {
-			border-radius: 16px;
-			padding: 0.5rem;
-		}
-		.nav-tab {
-			flex: 1 1 45%;
-			justify-content: center;
-		}
-	}
-
-	@media (max-width: 600px) {
+	/* Responsive Media Queries */
+	@media (max-width: 900px) {
 		.section-title-custom {
-			font-size: 2rem;
+			font-size: 2.2rem;
 		}
-		.nav-tab {
-			flex: 1 1 100%;
+		.programs-grid {
+			grid-template-columns: 1fr;
 		}
-		.discounts-compact-strip {
-			border-radius: 16px;
+		.menaul-spotlight {
+			padding: 2.5rem 1.5rem;
+		}
+		.menaul-header h3 {
+			font-size: 1.9rem;
+		}
+		.menaul-footer-bar {
 			flex-direction: column;
-			gap: 0.75rem;
+			align-items: stretch;
+		}
+		.btn-menaul-cta {
+			width: 100%;
 			text-align: center;
-		}
-		.compact-disc-divider {
-			display: none;
-		}
-		.discounts-compact-items {
-			flex-direction: column;
-			gap: 0.5rem;
+			justify-content: center;
 		}
 	}
 </style>
 
 <script>
-	// Tab Switcher Logic
-	const tabButtons = document.querySelectorAll('.nav-tab');
-	const tabPanels = document.querySelectorAll('.showcase-panel');
+	// Tab Filter Functionality
+	const tabs = document.querySelectorAll('.tab-btn');
+	const cards = document.querySelectorAll('.program-card-v2');
 
-	tabButtons.forEach((tab) => {
+	tabs.forEach((tab) => {
 		tab.addEventListener('click', () => {
-			tabButtons.forEach((btn) => {
-				btn.classList.remove('active');
-				btn.setAttribute('aria-selected', 'false');
+			tabs.forEach((t) => {
+				t.classList.remove('active');
+				t.setAttribute('aria-selected', 'false');
 			});
-			tabPanels.forEach((panel) => {
-				panel.classList.remove('active');
-			});
-
 			tab.classList.add('active');
 			tab.setAttribute('aria-selected', 'true');
 
-			const targetId = tab.getAttribute('data-target');
-			if (targetId) {
-				const activePanel = document.getElementById(targetId);
-				if (activePanel) {
-					activePanel.classList.add('active');
+			const filter = tab.getAttribute('data-filter');
+
+			cards.forEach((card) => {
+				const cardCat = card.getAttribute('data-category');
+				if (filter === 'all' || cardCat === filter) {
+					(card as HTMLElement).style.display = 'flex';
+				} else {
+					(card as HTMLElement).style.display = 'none';
 				}
-			}
+			});
 		});
 	});
 </script>
