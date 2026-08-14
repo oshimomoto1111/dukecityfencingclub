@@ -184,42 +184,42 @@ const programs = [
 				<article class={`program-card-v2 ${prog.featured ? 'featured-card' : ''}`} data-category={prog.category}>
 					{prog.featured && <div class="featured-ribbon">Most Popular</div>}
 					
-					<!-- Card Header Image & Badges -->
-					<div class="card-image-wrap" style={`background-image: url('${prog.img}');`}>
-						<div class="card-image-overlay"></div>
-						<div class="card-top-badges">
-							<span class="badge-age">{prog.badge}</span>
-							<span class="badge-trial">{prog.trialBadge}</span>
-						</div>
-						<div class="card-header-title">
-							<span class="card-level">{prog.level}</span>
-							<h3>{prog.title}</h3>
+					<!-- Interactive Card Cover / Header (Always Visible) -->
+					<div class="card-cover-trigger" role="button" tabindex="0" aria-expanded="false">
+						<div class="card-image-wrap" style={`background-image: url('${prog.img}');`}>
+							<div class="card-image-overlay"></div>
+							
+							<div class="card-top-badges">
+								<span class="badge-age">{prog.badge}</span>
+								<span class="badge-level-chip">{prog.level}</span>
+							</div>
+
+							<div class="card-header-content">
+								<h3 class="card-title">{prog.title}</h3>
+								<div class="card-expand-prompt">
+									<span class="prompt-text">View Pricing & Details</span>
+									<span class="prompt-icon-bubble"><i class="fas fa-chevron-down"></i></span>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<!-- Card Body -->
-					<div class="card-body">
-						<!-- Price Box -->
-						<div class="price-box">
-							<div class="price-main">
-								<span class="price-currency">{prog.price}</span>
-								<span class="price-period">{prog.period}</span>
+					<!-- Expandable Card Body (Hidden by default, unfolds on click) -->
+					<div class="card-body-collapsible">
+						<div class="card-body-inner">
+							<!-- Price Box -->
+							<div class="price-box">
+								<div class="price-main">
+									<span class="price-currency">{prog.price}</span>
+									<span class="price-period">{prog.period}</span>
+								</div>
+								<div class="trial-callout">
+									<i class="fas fa-tag"></i> {prog.trialInfo}
+								</div>
 							</div>
-							<div class="trial-callout">
-								<i class="fas fa-tag"></i> {prog.trialInfo}
-							</div>
-						</div>
 
-						<p class="card-description">{prog.description}</p>
+							<p class="card-description">{prog.description}</p>
 
-						<!-- Interactive Details Trigger Button -->
-						<button class="btn-toggle-details" type="button" aria-expanded="false">
-							<span class="toggle-text">View Schedule & Details</span>
-							<i class="fas fa-chevron-down toggle-icon"></i>
-						</button>
-
-						<!-- Expandable Details Drawer (Hidden by default) -->
-						<div class="card-details-drawer">
 							<!-- Schedules Block -->
 							<div class="schedule-block">
 								<div class="schedule-title"><i class="far fa-clock"></i> Class Schedule:</div>
@@ -241,13 +241,16 @@ const programs = [
 									</li>
 								))}
 							</ul>
-						</div>
 
-						<!-- CTA Button -->
-						<div class="card-cta-wrap">
-							<button class="btn-program-cta open-booking" type="button">
-								{prog.ctaText} <i class="fas fa-arrow-right"></i>
-							</button>
+							<!-- CTA Button -->
+							<div class="card-cta-wrap">
+								<button class="btn-program-cta open-booking" type="button">
+									{prog.ctaText} <i class="fas fa-arrow-right"></i>
+								</button>
+								<button class="btn-close-card" type="button">
+									<i class="fas fa-chevron-up"></i> Collapse Details
+								</button>
+							</div>
 						</div>
 					</div>
 				</article>
@@ -444,30 +447,31 @@ const programs = [
 	.programs-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-		gap: 2.5rem;
+		gap: 2rem;
 		margin-bottom: 5rem;
+		align-items: start;
 	}
 
 	.program-card-v2 {
 		background: #fff;
-		border-radius: 12px;
+		border-radius: 14px;
 		overflow: hidden;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 		border: 1px solid rgba(0, 59, 43, 0.1);
 		display: flex;
 		flex-direction: column;
-		transition: transform 0.35s ease, box-shadow 0.35s ease;
+		transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 		position: relative;
 	}
 
 	.program-card-v2:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+		border-color: rgba(0, 59, 43, 0.3);
 	}
 
 	.program-card-v2.featured-card {
 		border: 2px solid var(--accent-red);
-		box-shadow: 0 12px 35px rgba(226, 10, 23, 0.15);
+		box-shadow: 0 10px 30px rgba(226, 10, 23, 0.15);
 	}
 
 	.featured-ribbon {
@@ -486,24 +490,36 @@ const programs = [
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 	}
 
-	/* Card Image Header */
+	/* Card Cover Trigger (Interactive Photo Tile) */
+	.card-cover-trigger {
+		cursor: pointer;
+		user-select: none;
+		outline: none;
+	}
+
 	.card-image-wrap {
-		height: 200px;
+		height: 320px;
 		background-size: cover;
 		background-position: center;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		padding: 1.25rem;
+		padding: 1.5rem;
 		color: #fff;
+		transition: transform 0.4s ease;
+	}
+
+	.card-cover-trigger:hover .card-image-wrap {
+		/* subtle image zoom effect */
 	}
 
 	.card-image-overlay {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 30, 20, 0.92) 100%);
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 30, 20, 0.92) 100%);
 		z-index: 1;
+		transition: opacity 0.3s ease;
 	}
 
 	.card-top-badges {
@@ -516,57 +532,110 @@ const programs = [
 	}
 
 	.badge-age {
-		background: rgba(0, 59, 43, 0.85);
+		background: rgba(0, 59, 43, 0.9);
 		backdrop-filter: blur(6px);
 		color: #fff;
 		font-size: 0.75rem;
 		font-weight: 800;
-		padding: 0.3rem 0.75rem;
+		padding: 0.35rem 0.85rem;
 		border-radius: 50px;
-		border: 1px solid rgba(255, 255, 255, 0.3);
+		border: 1px solid rgba(255, 255, 255, 0.35);
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 	}
 
-	.badge-trial {
-		background: var(--gold);
-		color: var(--text-dark);
+	.badge-level-chip {
+		background: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(6px);
+		color: var(--gold);
 		font-size: 0.72rem;
 		font-weight: 800;
-		padding: 0.3rem 0.75rem;
+		padding: 0.35rem 0.75rem;
 		border-radius: 50px;
+		border: 1px solid rgba(212, 175, 55, 0.4);
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 	}
 
-	.card-header-title {
+	.card-header-content {
 		position: relative;
 		z-index: 2;
 	}
 
-	.card-level {
-		font-size: 0.78rem;
-		color: var(--gold);
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		display: block;
-		margin-bottom: 0.25rem;
-	}
-
-	.card-header-title h3 {
-		font-size: 1.45rem;
+	.card-title {
+		font-size: 1.6rem;
 		color: #fff;
-		margin: 0;
+		margin: 0 0 1rem 0;
 		line-height: 1.2;
+		font-family: var(--font-headings);
+		font-weight: 800;
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	}
 
-	/* Card Body */
-	.card-body {
+	.card-expand-prompt {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		background: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		color: #fff;
+		padding: 0.5rem 1rem;
+		border-radius: 50px;
+		font-size: 0.84rem;
+		font-weight: 700;
+		transition: all 0.25s ease;
+	}
+
+	.card-cover-trigger:hover .card-expand-prompt {
+		background: var(--gold);
+		color: var(--text-dark);
+		border-color: var(--gold);
+	}
+
+	.prompt-icon-bubble {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		background: rgba(255, 255, 255, 0.25);
+		border-radius: 50%;
+		font-size: 0.7rem;
+		transition: transform 0.3s ease;
+	}
+
+	.program-card-v2.expanded .prompt-icon-bubble {
+		transform: rotate(180deg);
+		background: var(--accent-red);
+		color: #fff;
+	}
+
+	.program-card-v2.expanded .card-expand-prompt {
+		background: rgba(0, 59, 43, 0.9);
+		border-color: var(--gold);
+		color: var(--gold);
+	}
+
+	/* Expandable Card Body */
+	.card-body-collapsible {
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+		background: #fff;
+	}
+
+	.program-card-v2.expanded .card-body-collapsible {
+		max-height: 1200px;
+		opacity: 1;
+	}
+
+	.card-body-inner {
 		padding: 1.75rem 1.5rem;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
+		border-top: 1px solid rgba(0, 59, 43, 0.08);
 	}
 
 	.price-box {
@@ -617,61 +686,6 @@ const programs = [
 		margin-bottom: 1.25rem;
 	}
 
-	/* Interactive Details Toggle Button */
-	.btn-toggle-details {
-		background-color: #f2f6f4;
-		border: 1px solid rgba(0, 59, 43, 0.15);
-		color: var(--primary-green);
-		padding: 0.65rem 1rem;
-		border-radius: 8px;
-		font-family: var(--font-headings);
-		font-weight: 700;
-		font-size: 0.84rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		width: 100%;
-		cursor: pointer;
-		margin-bottom: 1.25rem;
-		transition: all 0.25s ease;
-	}
-
-	.btn-toggle-details:hover {
-		background-color: #e5eee9;
-		border-color: var(--primary-green);
-	}
-
-	.btn-toggle-details.expanded {
-		background-color: var(--primary-green);
-		color: #fff;
-		border-color: var(--primary-green);
-	}
-
-	.toggle-icon {
-		font-size: 0.8rem;
-		transition: transform 0.3s ease;
-	}
-
-	.btn-toggle-details.expanded .toggle-icon {
-		transform: rotate(180deg);
-		color: var(--gold);
-	}
-
-	/* Expandable Details Drawer (Collapsible) */
-	.card-details-drawer {
-		max-height: 0;
-		overflow: hidden;
-		opacity: 0;
-		transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-bottom 0.3s ease;
-		margin-bottom: 0;
-	}
-
-	.card-details-drawer.open {
-		max-height: 600px;
-		opacity: 1;
-		margin-bottom: 1.5rem;
-	}
-
 	/* Schedules */
 	.schedule-block {
 		background: #fafafa;
@@ -709,7 +723,7 @@ const programs = [
 	/* Features */
 	.features-list {
 		list-style: none;
-		margin-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.65rem;
@@ -733,6 +747,28 @@ const programs = [
 
 	.card-cta-wrap {
 		margin-top: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.btn-close-card {
+		background: transparent;
+		border: none;
+		color: #777;
+		font-size: 0.82rem;
+		font-weight: 700;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		padding: 0.35rem;
+		transition: color 0.2s ease;
+	}
+
+	.btn-close-card:hover {
+		color: var(--primary-green);
 	}
 
 	.btn-program-cta {
@@ -1082,32 +1118,43 @@ const programs = [
 		});
 	});
 
-	// Interactive Card Details Toggle (Collapsible Drawer)
-	const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+	// Interactive Card Expand / Collapse Logic
+	cards.forEach((card) => {
+		const trigger = card.querySelector('.card-cover-trigger');
+		const closeBtn = card.querySelector('.btn-close-card');
+		const promptText = card.querySelector('.prompt-text');
 
-	toggleButtons.forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const card = btn.closest('.program-card-v2');
-			if (!card) return;
+		const toggleCard = () => {
+			const isExpanded = card.classList.contains('expanded');
 
-			const drawer = card.querySelector('.card-details-drawer');
-			const label = btn.querySelector('.toggle-text');
-			if (!drawer || !label) return;
-
-			const isCurrentlyOpen = drawer.classList.contains('open');
-
-			if (isCurrentlyOpen) {
-				drawer.classList.remove('open');
-				btn.classList.remove('expanded');
-				btn.setAttribute('aria-expanded', 'false');
-				label.textContent = 'View Schedule & Details';
+			if (isExpanded) {
+				card.classList.remove('expanded');
+				trigger?.setAttribute('aria-expanded', 'false');
+				if (promptText) promptText.textContent = 'View Pricing & Details';
 			} else {
-				drawer.classList.add('open');
-				btn.classList.add('expanded');
-				btn.setAttribute('aria-expanded', 'true');
-				label.textContent = 'Hide Details';
+				card.classList.add('expanded');
+				trigger?.setAttribute('aria-expanded', 'true');
+				if (promptText) promptText.textContent = 'Hide Details';
 			}
+		};
+
+		trigger?.addEventListener('click', toggleCard);
+
+		trigger?.addEventListener('keydown', (e) => {
+			const keyEvent = e as KeyboardEvent;
+			if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+				keyEvent.preventDefault();
+				toggleCard();
+			}
+		});
+
+		closeBtn?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			card.classList.remove('expanded');
+			trigger?.setAttribute('aria-expanded', 'false');
+			if (promptText) promptText.textContent = 'View Pricing & Details';
+			// Smoothly scroll back to the top of this card if needed
+			card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 		});
 	});
 </script>
