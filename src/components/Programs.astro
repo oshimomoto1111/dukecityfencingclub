@@ -212,27 +212,36 @@ const programs = [
 
 						<p class="card-description">{prog.description}</p>
 
-						<!-- Schedules Block -->
-						<div class="schedule-block">
-							<div class="schedule-title"><i class="far fa-clock"></i> Class Schedule:</div>
-							<div class="schedule-chips">
-								{prog.schedules.map((sch) => (
-									<div class="schedule-chip">
-										<strong>{sch.days}:</strong> {sch.time}
-									</div>
-								))}
-							</div>
-						</div>
+						<!-- Interactive Details Trigger Button -->
+						<button class="btn-toggle-details" type="button" aria-expanded="false">
+							<span class="toggle-text">View Schedule & Details</span>
+							<i class="fas fa-chevron-down toggle-icon"></i>
+						</button>
 
-						<!-- Features List -->
-						<ul class="features-list">
-							{prog.features.map((feat) => (
-								<li>
-									<i class="fas fa-check-circle"></i>
-									<span>{feat}</span>
-								</li>
-							))}
-						</ul>
+						<!-- Expandable Details Drawer (Hidden by default) -->
+						<div class="card-details-drawer">
+							<!-- Schedules Block -->
+							<div class="schedule-block">
+								<div class="schedule-title"><i class="far fa-clock"></i> Class Schedule:</div>
+								<div class="schedule-chips">
+									{prog.schedules.map((sch) => (
+										<div class="schedule-chip">
+											<strong>{sch.days}:</strong> {sch.time}
+										</div>
+									))}
+								</div>
+							</div>
+
+							<!-- Features List -->
+							<ul class="features-list">
+								{prog.features.map((feat) => (
+									<li>
+										<i class="fas fa-check-circle"></i>
+										<span>{feat}</span>
+									</li>
+								))}
+							</ul>
+						</div>
 
 						<!-- CTA Button -->
 						<div class="card-cta-wrap">
@@ -605,6 +614,61 @@ const programs = [
 		color: var(--text-dark);
 		opacity: 0.88;
 		line-height: 1.55;
+		margin-bottom: 1.25rem;
+	}
+
+	/* Interactive Details Toggle Button */
+	.btn-toggle-details {
+		background-color: #f2f6f4;
+		border: 1px solid rgba(0, 59, 43, 0.15);
+		color: var(--primary-green);
+		padding: 0.65rem 1rem;
+		border-radius: 8px;
+		font-family: var(--font-headings);
+		font-weight: 700;
+		font-size: 0.84rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		cursor: pointer;
+		margin-bottom: 1.25rem;
+		transition: all 0.25s ease;
+	}
+
+	.btn-toggle-details:hover {
+		background-color: #e5eee9;
+		border-color: var(--primary-green);
+	}
+
+	.btn-toggle-details.expanded {
+		background-color: var(--primary-green);
+		color: #fff;
+		border-color: var(--primary-green);
+	}
+
+	.toggle-icon {
+		font-size: 0.8rem;
+		transition: transform 0.3s ease;
+	}
+
+	.btn-toggle-details.expanded .toggle-icon {
+		transform: rotate(180deg);
+		color: var(--gold);
+	}
+
+	/* Expandable Details Drawer (Collapsible) */
+	.card-details-drawer {
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-bottom 0.3s ease;
+		margin-bottom: 0;
+	}
+
+	.card-details-drawer.open {
+		max-height: 600px;
+		opacity: 1;
 		margin-bottom: 1.5rem;
 	}
 
@@ -614,7 +678,7 @@ const programs = [
 		border: 1px solid #eaeaea;
 		border-radius: 8px;
 		padding: 0.85rem 1rem;
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.schedule-title {
@@ -645,11 +709,10 @@ const programs = [
 	/* Features */
 	.features-list {
 		list-style: none;
-		margin-bottom: 2rem;
+		margin-bottom: 0.5rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.65rem;
-		flex-grow: 1;
 	}
 
 	.features-list li {
@@ -1016,6 +1079,35 @@ const programs = [
 					(card as HTMLElement).style.display = 'none';
 				}
 			});
+		});
+	});
+
+	// Interactive Card Details Toggle (Collapsible Drawer)
+	const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+
+	toggleButtons.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const card = btn.closest('.program-card-v2');
+			if (!card) return;
+
+			const drawer = card.querySelector('.card-details-drawer');
+			const label = btn.querySelector('.toggle-text');
+			if (!drawer || !label) return;
+
+			const isCurrentlyOpen = drawer.classList.contains('open');
+
+			if (isCurrentlyOpen) {
+				drawer.classList.remove('open');
+				btn.classList.remove('expanded');
+				btn.setAttribute('aria-expanded', 'false');
+				label.textContent = 'View Schedule & Details';
+			} else {
+				drawer.classList.add('open');
+				btn.classList.add('expanded');
+				btn.setAttribute('aria-expanded', 'true');
+				label.textContent = 'Hide Details';
+			}
 		});
 	});
 </script>
