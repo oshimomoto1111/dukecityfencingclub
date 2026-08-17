@@ -2,50 +2,157 @@
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 
 const coaches = [
-	{ name: "Andy", role: "Adult Fencing Coach", img: `${base}andy.jpg` },
-	{ name: "Bella", role: "Fencing Coach", img: `${base}bella.jpg` },
-	{ name: "Izaya", role: "Fencing Coach", img: `${base}izaya.jpg` },
-	{ name: "Violet", role: "Fencing Coach", img: `${base}violet.jpg` },
+	{
+		name: "Andrew Carey",
+		nickname: "Coach Andy",
+		role: "Adult & Epee Coach",
+		img: `${base}andy.jpg`,
+		experience: "27+ Years Fencing Experience",
+		bio: "Andrew Carey began fencing in 1999 with the Reno Silver Blades Fencing Club, where he served as President from 2002 to 2003. With over 27 years on the strip, Andy has served as President of the University of New Mexico Fencing Club and Chair of the New Mexico Division of USA Fencing (USFA). In 2016, he was honored with the prestigious USA Fencing Spirit of Sport Champion award. Andy has been an essential coach at Duke City Fencing Club since 2012, leading our adult recreation programs and inspiring fencers of all backgrounds to master the art of epee.",
+		highlights: [
+			"Coaching at Duke City Fencing since 2012",
+			"USA Fencing Spirit of Sport Champion (2016)",
+			"Former Chair, NM Division of USA Fencing",
+			"Former President, UNM Fencing Club",
+		]
+	},
+	{
+		name: "Bella",
+		nickname: "Coach Bella",
+		role: "Youth & Fundamentals Coach",
+		img: `${base}bella.jpg`,
+		experience: "Youth Development Specialist",
+		bio: "Coach Bella brings tremendous energy, patience, and technical discipline to our youth and beginner programs. She focuses on cultivating proper blade safety, agile footwork, coordination, and a fun, supportive team spirit for young fencers taking their first steps in the sport.",
+		highlights: [
+			"Youth & Mini Musketeers instruction",
+			"Foundational footwork & blade safety",
+			"Positive athletic development",
+		]
+	},
+	{
+		name: "Izaya",
+		nickname: "Coach Izaya",
+		role: "Tactical & Strip Coach",
+		img: `${base}izaya.jpg`,
+		experience: "Competitive Strip Coach",
+		bio: "Coach Izaya works closely with developing and intermediate fencers, emphasizing bout tactics, distance management, and mental focus during high-pressure match situations.",
+		highlights: [
+			"Intermediate & competitive bout coaching",
+			"Distance control & tactical drills",
+			"Sparring & electric strip refereeing",
+		]
+	},
+	{
+		name: "Violet",
+		nickname: "Coach Violet",
+		role: "Youth & Technical Coach",
+		img: `${base}violet.jpg`,
+		experience: "Technique & Conditioning Coach",
+		bio: "Coach Violet specializes in technical blade precision, agility conditioning, and building confidence in young athletes transitioning into club tournaments.",
+		highlights: [
+			"Technical blade precision drills",
+			"Youth tournament preparation",
+			"Agility & athletic conditioning",
+		]
+	},
 ];
 ---
 
 <section class="authority" id="coaches">
 	<div class="authority-container">
+		
+		<!-- Head Coach Spotlight: Courtney Hurley -->
 		<div class="coach-showcase">
 			<div class="coach-img-container">
 				<img src={`${base}courtney.jpg`} alt="Coach Courtney Hurley - Olympic Medalist" class="coach-img" width="380" height="475" loading="lazy" />
+				<div class="olympic-badge-overlay">
+					<i class="fas fa-medal"></i> London 2012 Bronze Medalist
+				</div>
 			</div>
 			<div class="coach-text">
 				<span class="coach-subtitle">Head Coach & Founder</span>
 				<h2>Learn from an Olympic Medalist</h2>
-				<p>
-					Led by 3-time Olympian and London 2012 Bronze Medalist, Courtney Hurley. As a certified Fencing Maestra—the highest coaching distinction worldwide—Courtney brings over 20 years of elite competitive experience directly to Albuquerque.
+				<p class="coach-lead">
+					Led by 3-time Olympian, World Champion, and London 2012 Olympic Bronze Medalist <strong>Courtney Hurley</strong>. As a certified Fencing Master (Maestra)—the highest coaching distinction worldwide—Courtney brings over two decades of world-class international experience directly to Albuquerque.
 				</p>
 				<p>
-					Whether you are stepping onto the strip for the first time or aiming for the national podium, you are learning directly from the very best in the sport.
+					Whether you are stepping onto the strip for the first time or training for national podium finishes and NCAA collegiate recruitment, you are guided by one of the most decorated epee fencers in United States history.
 				</p>
-				<button class="btn-solid open-booking" type="button">Train with Courtney</button>
+				<div class="courtney-credentials">
+					<div class="cred-chip"><i class="fas fa-trophy"></i> 3x Olympian (2012, 2016, 2020)</div>
+					<div class="cred-chip"><i class="fas fa-graduation-cap"></i> 2x NCAA Champion (Notre Dame)</div>
+					<div class="cred-chip"><i class="fas fa-award"></i> Certified Fencing Master (Maestra)</div>
+				</div>
+				<button class="btn-solid open-booking" type="button">Train with Courtney <i class="fas fa-arrow-right"></i></button>
 			</div>
 		</div>
 
-		<h3 class="team-section-title">Meet Our Coaching Staff</h3>
+		<!-- Coaching Staff Grid -->
+		<div class="team-section-header">
+			<span class="section-kicker">Dedicated Mentors</span>
+			<h3 class="team-section-title">Meet Our Coaching Staff</h3>
+			<p class="team-section-subtitle">
+				Click on any coach below to learn more about their fencing background, achievements, and coaching philosophy.
+			</p>
+		</div>
+
 		<div class="team-grid">
 			{coaches.map((coach) => (
-				<div class="team-card">
-					<img src={coach.img} alt={`Coach ${coach.name}`} class="team-avatar" width="120" height="120" loading="lazy" />
-					<h4 class="team-name">{coach.name}</h4>
-					<div class="team-role">{coach.role}</div>
-				</div>
+				<article class="coach-card-interactive" tabindex="0" role="button" aria-expanded="false">
+					
+					<!-- Card Header / Cover (Photo, Name, Role) -->
+					<div class="coach-card-cover">
+						<div class="coach-avatar-wrap">
+							<img src={coach.img} alt={`Coach ${coach.name}`} class="coach-avatar" width="130" height="130" loading="lazy" />
+							<div class="avatar-glow"></div>
+						</div>
+
+						<h4 class="coach-name">{coach.name}</h4>
+						<div class="coach-role">{coach.role}</div>
+						<div class="coach-exp-badge">{coach.experience}</div>
+
+						<!-- Interactive Trigger Button -->
+						<div class="coach-toggle-prompt">
+							<span class="prompt-text">Read Biography</span>
+							<span class="prompt-icon"><i class="fas fa-chevron-down"></i></span>
+						</div>
+					</div>
+
+					<!-- Expandable Bio Drawer (Hidden until clicked) -->
+					<div class="coach-bio-drawer">
+						<div class="coach-bio-content">
+							<p class="coach-bio-text">{coach.bio}</p>
+
+							{coach.highlights && coach.highlights.length > 0 && (
+								<div class="coach-highlights">
+									<div class="highlights-title"><i class="fas fa-star"></i> Key Highlights:</div>
+									<ul class="highlights-list">
+										{coach.highlights.map((item) => (
+											<li><i class="fas fa-check"></i> <span>{item}</span></li>
+										))}
+									</ul>
+								</div>
+							)}
+
+							<button class="btn-close-bio" type="button">
+								<i class="fas fa-chevron-up"></i> Close Bio
+							</button>
+						</div>
+					</div>
+
+				</article>
 			))}
 		</div>
+
 	</div>
 </section>
 
 <style>
 	.authority {
-		background-color: var(--text-dark);
+		background: linear-gradient(180deg, #091a13 0%, #040e0a 100%);
 		color: var(--text-light);
 		padding: var(--section-padding);
+		position: relative;
 	}
 
 	.authority-container {
@@ -53,125 +160,381 @@ const coaches = [
 		margin: 0 auto;
 	}
 
+	/* Head Coach Showcase */
 	.coach-showcase {
 		display: grid;
-		grid-template-columns: 42% 58%;
+		grid-template-columns: 40% 60%;
 		align-items: center;
 		gap: 4rem;
 		margin-bottom: 5rem;
+		background: rgba(255, 255, 255, 0.03);
+		border-radius: 16px;
+		padding: 3rem;
+		border: 1px solid rgba(212, 175, 55, 0.25);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 	}
 
 	.coach-img-container {
 		width: 100%;
+		position: relative;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.coach-img {
 		width: 100%;
-		max-width: 400px;
+		max-width: 380px;
 		height: auto;
-		border-radius: var(--border-radius);
-		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 12px;
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+		border: 2px solid rgba(212, 175, 55, 0.4);
+	}
+
+	.olympic-badge-overlay {
+		margin-top: -1.25rem;
+		background: var(--gold);
+		color: var(--text-dark);
+		font-family: var(--font-headings);
+		font-weight: 800;
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 0.45rem 1.25rem;
+		border-radius: 50px;
+		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		position: relative;
+		z-index: 2;
 	}
 
 	.coach-subtitle {
 		display: inline-block;
 		color: var(--accent-red);
 		font-weight: 800;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		text-transform: uppercase;
-		letter-spacing: 1.5px;
+		letter-spacing: 2px;
 		margin-bottom: 0.5rem;
 	}
 
 	.coach-text h2 {
-		font-size: 2.6rem;
+		font-size: 2.5rem;
 		margin-bottom: 1.25rem;
 		color: var(--bg-cream);
 		line-height: 1.15;
 	}
 
-	.coach-text p {
+	.coach-lead {
 		font-size: 1.1rem;
-		opacity: 0.9;
-		margin-bottom: 1.5rem;
 		line-height: 1.7;
+		margin-bottom: 1rem;
+		color: #f0f0f0;
+	}
+
+	.coach-lead strong {
+		color: var(--gold);
+	}
+
+	.coach-text p {
+		font-size: 1rem;
+		opacity: 0.88;
+		margin-bottom: 1.5rem;
+		line-height: 1.65;
+	}
+
+	.courtney-credentials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 2rem;
+	}
+
+	.cred-chip {
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		padding: 0.45rem 0.9rem;
+		border-radius: 50px;
+		font-size: 0.84rem;
+		color: #e0e0e0;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+
+	.cred-chip i {
+		color: var(--gold);
 	}
 
 	.btn-solid {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
 		background-color: var(--accent-red);
 		color: var(--text-light);
 		padding: 0.9rem 2rem;
 		border-radius: var(--border-radius);
-		font-weight: 700;
+		font-weight: 800;
 		font-family: var(--font-headings);
 		text-transform: uppercase;
-		font-size: 0.95rem;
+		font-size: 0.92rem;
 		border: none;
 		cursor: pointer;
 		letter-spacing: 1px;
-		transition: background 0.3s, transform 0.2s;
+		transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+		box-shadow: 0 4px 15px rgba(226, 10, 23, 0.4);
 	}
 
 	.btn-solid:hover {
 		background-color: var(--accent-red-hover);
 		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(226, 10, 23, 0.55);
+	}
+
+	/* Team Section Header */
+	.team-section-header {
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto 3rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		padding-top: 4rem;
+	}
+
+	.section-kicker {
+		display: inline-block;
+		color: var(--accent-red);
+		font-weight: 800;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin-bottom: 0.5rem;
 	}
 
 	.team-section-title {
-		text-align: center;
-		font-size: 2.2rem;
-		margin-bottom: 3.5rem;
+		font-size: 2.4rem;
+		margin-bottom: 0.75rem;
 		color: var(--bg-cream);
-		border-top: 1px solid rgba(255, 255, 255, 0.12);
-		padding-top: 4.5rem;
 	}
 
+	.team-section-subtitle {
+		font-size: 1rem;
+		opacity: 0.85;
+		line-height: 1.5;
+	}
+
+	/* Interactive Coach Cards Grid */
 	.team-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 		gap: 2rem;
+		align-items: start;
 	}
 
-	.team-card {
-		background-color: rgba(255, 255, 255, 0.04);
-		border-radius: var(--border-radius);
-		padding: 2.25rem 1.5rem;
+	.coach-card-interactive {
+		background: rgba(255, 255, 255, 0.04);
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		overflow: hidden;
+		transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+		cursor: pointer;
+		outline: none;
+		position: relative;
+	}
+
+	.coach-card-interactive:hover {
+		background: rgba(255, 255, 255, 0.07);
+		border-color: rgba(212, 175, 55, 0.4);
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+	}
+
+	.coach-card-interactive.expanded {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: var(--gold);
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Card Cover */
+	.coach-card-cover {
+		padding: 2.25rem 1.5rem 1.75rem;
 		text-align: center;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		transition: transform 0.3s ease, background-color 0.3s ease;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
-	.team-card:hover {
-		transform: translateY(-5px);
-		background-color: rgba(255, 255, 255, 0.07);
+	.coach-avatar-wrap {
+		position: relative;
+		width: 130px;
+		height: 130px;
+		margin-bottom: 1.25rem;
 	}
 
-	.team-avatar {
-		width: 120px;
-		height: 120px;
+	.coach-avatar {
+		width: 130px;
+		height: 130px;
 		border-radius: 50%;
 		object-fit: cover;
-		margin: 0 auto 1.5rem;
-		border: 3px solid var(--accent-red);
-		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+		border: 3px solid var(--gold);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+		position: relative;
+		z-index: 2;
+		transition: transform 0.3s ease;
 	}
 
-	.team-name {
-		font-size: 1.45rem;
+	.coach-card-interactive:hover .coach-avatar {
+		transform: scale(1.04);
+	}
+
+	.coach-name {
+		font-size: 1.4rem;
 		color: var(--bg-cream);
-		margin-bottom: 0.4rem;
+		margin-bottom: 0.35rem;
+		font-family: var(--font-headings);
+		font-weight: 800;
 	}
 
-	.team-role {
+	.coach-role {
 		font-size: 0.85rem;
 		color: var(--gold);
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 1px;
+		margin-bottom: 0.6rem;
+	}
+
+	.coach-exp-badge {
+		font-size: 0.78rem;
+		color: rgba(255, 255, 255, 0.7);
+		background: rgba(255, 255, 255, 0.06);
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+		margin-bottom: 1.25rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.coach-toggle-prompt {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: #fff;
+		padding: 0.45rem 1rem;
+		border-radius: 50px;
+		font-size: 0.82rem;
+		font-weight: 700;
+		transition: all 0.25s ease;
+	}
+
+	.coach-card-interactive:hover .coach-toggle-prompt {
+		background: var(--gold);
+		color: var(--text-dark);
+		border-color: var(--gold);
+	}
+
+	.prompt-icon {
+		font-size: 0.75rem;
+		transition: transform 0.3s ease;
+	}
+
+	.coach-card-interactive.expanded .prompt-icon {
+		transform: rotate(180deg);
+	}
+
+	.coach-card-interactive.expanded .coach-toggle-prompt {
+		background: var(--primary-green);
+		color: var(--gold);
+		border-color: var(--gold);
+	}
+
+	/* Expandable Bio Drawer */
+	.coach-bio-drawer {
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+		background: rgba(0, 0, 0, 0.25);
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.coach-card-interactive.expanded .coach-bio-drawer {
+		max-height: 800px;
+		opacity: 1;
+	}
+
+	.coach-bio-content {
+		padding: 1.5rem;
+		text-align: left;
+	}
+
+	.coach-bio-text {
+		font-size: 0.92rem;
+		color: #e0e0e0;
+		line-height: 1.6;
+		margin-bottom: 1.25rem;
+	}
+
+	.coach-highlights {
+		background: rgba(255, 255, 255, 0.04);
+		border-radius: 8px;
+		padding: 0.85rem 1rem;
+		margin-bottom: 1.25rem;
+		border-left: 3px solid var(--gold);
+	}
+
+	.highlights-title {
+		font-size: 0.78rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color: var(--gold);
+		margin-bottom: 0.4rem;
+	}
+
+	.highlights-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.highlights-list li {
+		font-size: 0.82rem;
+		color: #ccc;
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+
+	.highlights-list i {
+		color: var(--gold);
+		font-size: 0.75rem;
+	}
+
+	.btn-close-bio {
+		width: 100%;
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: #aaa;
+		font-size: 0.8rem;
+		font-weight: 700;
+		padding: 0.45rem;
+		border-radius: 6px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		transition: all 0.2s ease;
+	}
+
+	.btn-close-bio:hover {
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		border-color: #fff;
 	}
 
 	@media (max-width: 900px) {
@@ -179,12 +542,66 @@ const coaches = [
 			grid-template-columns: 1fr;
 			gap: 2.5rem;
 			text-align: center;
+			padding: 2rem 1.5rem;
 		}
 		.coach-img {
-			max-width: 320px;
+			max-width: 300px;
 		}
 		.coach-text h2 {
 			font-size: 2.1rem;
 		}
+		.courtney-credentials {
+			justify-content: center;
+		}
+		.team-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
+
+<script>
+	// Interactive Coach Card Expand / Collapse Logic
+	const coachCards = document.querySelectorAll('.coach-card-interactive');
+
+	coachCards.forEach((card) => {
+		const promptLabel = card.querySelector('.prompt-text');
+		const closeBtn = card.querySelector('.btn-close-bio');
+
+		const toggleBio = () => {
+			const isExpanded = card.classList.contains('expanded');
+
+			if (isExpanded) {
+				card.classList.remove('expanded');
+				card.setAttribute('aria-expanded', 'false');
+				if (promptLabel) promptLabel.textContent = 'Read Biography';
+			} else {
+				card.classList.add('expanded');
+				card.setAttribute('aria-expanded', 'true');
+				if (promptLabel) promptLabel.textContent = 'Hide Biography';
+			}
+		};
+
+		// Click on card cover to toggle
+		card.querySelector('.coach-card-cover')?.addEventListener('click', toggleBio);
+
+		// Keyboard Enter / Space support
+		card.addEventListener('keydown', (e) => {
+			const keyEvent = e as KeyboardEvent;
+			if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+				if (document.activeElement === card) {
+					keyEvent.preventDefault();
+					toggleBio();
+				}
+			}
+		});
+
+		// Close button inside bio
+		closeBtn?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			card.classList.remove('expanded');
+			card.setAttribute('aria-expanded', 'false');
+			if (promptLabel) promptLabel.textContent = 'Read Biography';
+			card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		});
+	});
+</script>
