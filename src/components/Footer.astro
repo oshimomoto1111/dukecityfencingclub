@@ -62,14 +62,21 @@ const currentYear = new Date().getFullYear();
 				</div>
 			</div>
 
-			<!-- Columna 3: Mapa del Campus (Croquis Exclusivo) -->
+			<!-- Columna 3: Mapa del Campus (Croquis Interactivo con Zoom) -->
 			<div class="footer-col">
 				<h4>Find Us On Campus</h4>
-				<div class="campus-map-wrapper">
-					<img src={`${base}mapa-menaul.png`} alt="Campus Map to Duke City Fencing Club Gym" class="campus-map-img" loading="lazy" />
+				
+				<div class="campus-map-interactive-trigger" id="openMapLightbox" role="button" tabindex="0" aria-label="Click to enlarge campus map">
+					<div class="campus-map-wrapper">
+						<img src={`${base}mapa-menaul.png`} alt="Campus Map to Duke City Fencing Club Gym" class="campus-map-img" loading="lazy" />
+						<div class="map-zoom-badge">
+							<i class="fas fa-search-plus"></i> Click to Enlarge Map
+						</div>
+					</div>
 				</div>
+
 				<p class="map-hint">
-					*Use the Google map to arrive at 301 Menaul Blvd NE, then follow the campus map directions to reach the Gym.
+					*Use Google Maps to arrive at 301 Menaul Blvd NE, then click the campus map above for driving and walking directions to the Gym.
 				</p>
 			</div>
 
@@ -77,6 +84,23 @@ const currentYear = new Date().getFullYear();
 
 		<div class="footer-bottom">
 			<p>&copy; {currentYear} Duke City Fencing Club. All rights reserved. | Website designed by Alqimia Creativa.</p>
+		</div>
+	</div>
+
+	<!-- Modal / Lightbox para el Mapa Ampliado -->
+	<div class="map-lightbox" id="mapLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+		<div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+		<div class="lightbox-container">
+			<button class="lightbox-close-btn" id="closeMapLightbox" type="button" aria-label="Close enlarged map">
+				<i class="fas fa-times"></i>
+			</button>
+			<div class="lightbox-image-wrap">
+				<img src={`${base}mapa-menaul.png`} alt="Enlarged Campus Map to Duke City Fencing Club Gym" class="lightbox-enlarged-img" />
+			</div>
+			<div class="lightbox-footer">
+				<span class="lightbox-caption"><i class="fas fa-map-signs"></i> Menaul School Campus Map — Directions to Fencing Gymnasium</span>
+				<span class="lightbox-subcaption">Press ESC or click anywhere outside to close</span>
+			</div>
 		</div>
 	</div>
 </footer>
@@ -87,6 +111,7 @@ const currentYear = new Date().getFullYear();
 		color: var(--text-light);
 		padding: var(--section-padding) 1.5rem 2rem;
 		border-top: 5px solid var(--primary-green);
+		position: relative;
 	}
 
 	.footer-container {
@@ -185,24 +210,66 @@ const currentYear = new Date().getFullYear();
 		border: 2px solid rgba(255, 255, 255, 0.1);
 	}
 
+	/* Campus Map Interactive Thumbnail */
+	.campus-map-interactive-trigger {
+		cursor: pointer;
+		outline: none;
+	}
+
 	.campus-map-wrapper {
 		width: 100%;
 		border-radius: var(--border-radius);
 		overflow: hidden;
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+		border: 2px solid rgba(212, 175, 55, 0.4);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+		position: relative;
+		transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.campus-map-interactive-trigger:hover .campus-map-wrapper,
+	.campus-map-interactive-trigger:focus .campus-map-wrapper {
+		transform: translateY(-3px) scale(1.02);
+		border-color: var(--gold);
+		box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
 	}
 
 	.campus-map-img {
 		width: 100%;
 		height: auto;
 		display: block;
+		transition: filter 0.3s ease;
+	}
+
+	.map-zoom-badge {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		background: rgba(0, 59, 43, 0.9);
+		backdrop-filter: blur(6px);
+		color: var(--gold);
+		border: 1px solid var(--gold);
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		padding: 0.35rem 0.75rem;
+		border-radius: 50px;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+		transition: background 0.25s ease, color 0.25s ease;
+	}
+
+	.campus-map-interactive-trigger:hover .map-zoom-badge {
+		background: var(--gold);
+		color: var(--text-dark);
 	}
 
 	.map-hint {
 		font-size: 0.85rem;
-		opacity: 0.8;
-		margin-top: 1rem;
+		opacity: 0.85;
+		margin-top: 0.85rem;
 		line-height: 1.5;
 	}
 
@@ -214,4 +281,185 @@ const currentYear = new Date().getFullYear();
 		opacity: 0.65;
 		font-size: 0.85rem;
 	}
+
+	/* ========================================================
+	   LIGHTBOX MODAL FOR ENLARGED CAMPUS MAP
+	   ======================================================== */
+	.map-lightbox {
+		position: fixed;
+		inset: 0;
+		z-index: 99999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.map-lightbox.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.lightbox-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.85);
+		backdrop-filter: blur(8px);
+	}
+
+	.lightbox-container {
+		position: relative;
+		z-index: 2;
+		background: #091a13;
+		border: 2px solid var(--gold);
+		border-radius: 16px;
+		padding: 1.5rem;
+		max-width: 92vw;
+		max-height: 90vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+		transform: scale(0.92);
+		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.map-lightbox.active .lightbox-container {
+		transform: scale(1);
+	}
+
+	.lightbox-close-btn {
+		position: absolute;
+		top: -16px;
+		right: -16px;
+		width: 44px;
+		height: 44px;
+		background: var(--accent-red);
+		color: #fff;
+		border: 2px solid #fff;
+		border-radius: 50%;
+		font-size: 1.3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+		transition: background 0.2s, transform 0.2s;
+	}
+
+	.lightbox-close-btn:hover {
+		background: var(--accent-red-hover);
+		transform: scale(1.1);
+	}
+
+	.lightbox-image-wrap {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: auto;
+		max-height: 75vh;
+	}
+
+	.lightbox-enlarged-img {
+		max-width: 100%;
+		max-height: 72vh;
+		width: auto;
+		height: auto;
+		border-radius: 8px;
+		object-fit: contain;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+	}
+
+	.lightbox-footer {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 1rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.12);
+		font-size: 0.85rem;
+		color: #eee;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.lightbox-caption {
+		color: var(--gold);
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.lightbox-subcaption {
+		opacity: 0.6;
+		font-size: 0.78rem;
+	}
+
+	@media (max-width: 600px) {
+		.lightbox-container {
+			padding: 1rem;
+			max-width: 96vw;
+		}
+		.lightbox-close-btn {
+			top: -12px;
+			right: -12px;
+			width: 36px;
+			height: 36px;
+			font-size: 1.1rem;
+		}
+		.lightbox-footer {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
 </style>
+
+<script>
+	// Lightbox Modal Logic for Campus Map
+	const openTrigger = document.getElementById('openMapLightbox');
+	const lightbox = document.getElementById('mapLightbox');
+	const closeBtn = document.getElementById('closeMapLightbox');
+	const backdrop = document.getElementById('lightboxBackdrop');
+
+	function openModal() {
+		if (lightbox) {
+			lightbox.classList.add('active');
+			lightbox.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden'; // Prevent background scrolling
+		}
+	}
+
+	function closeModal() {
+		if (lightbox) {
+			lightbox.classList.remove('active');
+			lightbox.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = ''; // Restore background scrolling
+		}
+	}
+
+	openTrigger?.addEventListener('click', openModal);
+
+	openTrigger?.addEventListener('keydown', (e) => {
+		const keyEvent = e as KeyboardEvent;
+		if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+			keyEvent.preventDefault();
+			openModal();
+		}
+	});
+
+	closeBtn?.addEventListener('click', closeModal);
+	backdrop?.addEventListener('click', closeModal);
+
+	// Close on ESC key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
+			closeModal();
+		}
+	});
+</script>
