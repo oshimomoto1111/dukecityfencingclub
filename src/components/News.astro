@@ -89,20 +89,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 		</div>
 
-		<!-- Social Media Direct Link Callout -->
-		<div class="news-social-callout">
-			<div class="social-callout-text">
-				<i class="fab fa-instagram callout-icon"></i>
-				<div>
-					<strong>Looking for daily photos and behind-the-scenes action?</strong>
-					<span>Follow <a href="https://www.instagram.com/dukecityfencing/" target="_blank" rel="noopener noreferrer">@dukecityfencing</a> on Instagram for real-time club updates.</span>
-				</div>
-			</div>
-			<a href="https://www.instagram.com/dukecityfencing/" target="_blank" rel="noopener noreferrer" class="btn-social-follow">
-				Follow on Instagram <i class="fas fa-arrow-right"></i>
-			</a>
-		</div>
-
 	</div>
 </section>
 
@@ -322,84 +308,12 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		color: var(--gold);
 	}
 
-	/* Social Callout Banner */
-	.news-social-callout {
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 14px;
-		padding: 1.25rem 2rem;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1.5rem;
-		flex-wrap: wrap;
-	}
-
-	.social-callout-text {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.callout-icon {
-		font-size: 1.8rem;
-		color: #e1306c;
-	}
-
-	.social-callout-text strong {
-		display: block;
-		color: var(--bg-cream);
-		font-size: 0.95rem;
-		margin-bottom: 0.2rem;
-	}
-
-	.social-callout-text span {
-		font-size: 0.85rem;
-		color: #aaa;
-	}
-
-	.social-callout-text a {
-		color: var(--gold);
-		text-decoration: underline;
-		font-weight: 700;
-	}
-
-	.btn-social-follow {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		color: #fff;
-		padding: 0.6rem 1.25rem;
-		border-radius: 50px;
-		font-size: 0.85rem;
-		font-weight: 700;
-		text-decoration: none;
-		transition: background 0.25s, border-color 0.25s, color 0.25s;
-		white-space: nowrap;
-	}
-
-	.btn-social-follow:hover {
-		background: var(--gold);
-		color: var(--text-dark);
-		border-color: var(--gold);
-	}
-
 	@media (max-width: 900px) {
 		.bento-grid {
 			grid-template-columns: 1fr;
 		}
 		.section-title-custom {
 			font-size: 2.1rem;
-		}
-		.news-social-callout {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-		.btn-social-follow {
-			width: 100%;
-			justify-content: center;
 		}
 	}
 </style>
