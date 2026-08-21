@@ -7,14 +7,8 @@ const coaches = [
 		nickname: "Coach Andy",
 		role: "Fencing Coach",
 		img: `${base}andy.jpg`,
-		experience: "27+ Years Fencing Experience",
-		bio: "Andrew Carey began fencing in 1999 with the Reno Silver Blades Fencing Club, where he served as President from 2002 to 2003. With over 27 years on the strip, Andy has served as President of the University of New Mexico Fencing Club and Chair of the New Mexico Division of USA Fencing (USFA). In 2016, he was honored with the prestigious USA Fencing Spirit of Sport Champion award. Andy has been an essential coach at Duke City Fencing Club since 2012, leading our adult recreation programs and inspiring fencers of all backgrounds to master the art of epee.",
-		highlights: [
-			"Coaching at Duke City Fencing since 2012",
-			"USA Fencing Spirit of Sport Champion (2016)",
-			"Former Chair, NM Division of USA Fencing",
-			"Former President, UNM Fencing Club",
-		]
+		experience: "27+ Years Experience",
+		bio: "With over 27 years of fencing experience, Coach Andy has been coaching at Duke City Fencing since 2012. A former UNM Fencing Club President and NM Division USFA Chair, he received the 2016 USA Fencing Spirit of Sport Champion award and directs our adult epee programs.",
 	},
 	{
 		name: "Bella",
@@ -22,14 +16,7 @@ const coaches = [
 		role: "Fencing Coach",
 		img: `${base}bella.jpg`,
 		experience: "Former NCAA D1 Competitor & Coach",
-		bio: "Coach Bella is a former NCAA epee fencer and collegiate coach with over 15 years of fencing experience. A standout talent from the beginning, she qualified for her first National Championship after just three months of training, captured Gold at age 15 at a Division II North American Cup (NAC), and earned her 'B' rating in under two years. Recruited on scholarship to fence for the University of the Incarnate Word (UIW), Bella posted a remarkable 19–3 record in her debut NCAA meet, consistently qualified for NCAA Regionals, and served as Team Captain for three consecutive seasons. With over 6.5 years of national and collegiate coaching experience, Coach Bella specializes in athletic conditioning, developing competitive mental toughness, and high-level strip coaching.",
-		highlights: [
-			"Former NCAA Epeeist (UIW Scholarship Athlete)",
-			"3-Year NCAA Team Captain",
-			"Div II NAC Gold Medalist (Age 15)",
-			"6.5+ Years National & Collegiate Coaching Experience",
-			"Specialist in Conditioning & Competitive Mentality",
-		]
+		bio: "Coach Bella is a former NCAA Division I epee fencer, 3-year team captain at UIW, and Div II NAC Gold Medalist. With 6.5+ years of collegiate and national coaching, she specializes in athletic conditioning, mental resilience, and high-performance strip coaching.",
 	},
 	{
 		name: "Izeyah Longshore",
@@ -37,26 +24,15 @@ const coaches = [
 		role: "Fencing Coach",
 		img: `${base}izaya.jpg`,
 		experience: "A-Rated Epee Competitor",
-		bio: "Izeyah Longshore was introduced to fencing at the age of six and has dedicated himself to the sport ever since. Having begun his competitive journey in foil before mastering epee as his primary weapon, Izeyah has earned an 'A' rating in Epee—the highest classification awarded by USA Fencing—and has competed at numerous National Championships and the Junior Olympics. As an assistant coach at Duke City Fencing Club, Izeyah brings elite competitive tournament experience, technical blade discipline, and enthusiasm to mentoring our fencers.",
-		highlights: [
-			"USA Fencing 'A' Rated Epeeist",
-			"Junior Olympics & National Championship Competitor",
-			"Over a decade of competitive strip experience",
-			"Assistant Coach at Duke City Fencing Club",
-		]
+		bio: "Fencing competitively since age six, Coach Izeyah is a USA Fencing 'A'-rated epeeist who has competed at National Championships and the Junior Olympics. As an assistant coach, he brings tournament expertise and technical precision to mentoring our club fencers.",
 	},
 	{
 		name: "Violet",
 		nickname: "Coach Violet",
 		role: "Fencing Coach",
 		img: `${base}violet.jpg`,
-		experience: "Technique & Conditioning Coach",
-		bio: "Coach Violet specializes in technical blade precision, agility conditioning, and building confidence in young athletes transitioning into club tournaments.",
-		highlights: [
-			"Technical blade precision drills",
-			"Youth tournament preparation",
-			"Agility & athletic conditioning",
-		]
+		experience: "Youth Development Coach",
+		bio: "Coach Violet specializes in technical blade precision, agility footwork, and youth tournament preparation, helping developing fencers build strong fundamentals, discipline, and confidence on the strip.",
 	},
 ];
 ---
@@ -125,17 +101,6 @@ const coaches = [
 					<div class="coach-bio-drawer">
 						<div class="coach-bio-content">
 							<p class="coach-bio-text">{coach.bio}</p>
-
-							{coach.highlights && coach.highlights.length > 0 && (
-								<div class="coach-highlights">
-									<div class="highlights-title"><i class="fas fa-star"></i> Key Highlights:</div>
-									<ul class="highlights-list">
-										{coach.highlights.map((item) => (
-											<li><i class="fas fa-check"></i> <span>{item}</span></li>
-										))}
-									</ul>
-								</div>
-							)}
 
 							<button class="btn-close-bio" type="button">
 								<i class="fas fa-chevron-up"></i> Close Bio
@@ -469,52 +434,15 @@ const coaches = [
 	}
 
 	.coach-bio-content {
-		padding: 1.5rem;
+		padding: 1.25rem 1.4rem;
 		text-align: left;
 	}
 
 	.coach-bio-text {
-		font-size: 0.92rem;
-		color: #e0e0e0;
+		font-size: 0.9rem;
+		color: #e5e5e5;
 		line-height: 1.6;
-		margin-bottom: 1.25rem;
-	}
-
-	.coach-highlights {
-		background: rgba(255, 255, 255, 0.04);
-		border-radius: 8px;
-		padding: 0.85rem 1rem;
-		margin-bottom: 1.25rem;
-		border-left: 3px solid var(--gold);
-	}
-
-	.highlights-title {
-		font-size: 0.78rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		color: var(--gold);
-		margin-bottom: 0.4rem;
-	}
-
-	.highlights-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-	}
-
-	.highlights-list li {
-		font-size: 0.82rem;
-		color: #ccc;
-		display: flex;
-		align-items: center;
-		gap: 0.45rem;
-	}
-
-	.highlights-list i {
-		color: var(--gold);
-		font-size: 0.75rem;
+		margin-bottom: 1rem;
 	}
 
 	.btn-close-bio {
