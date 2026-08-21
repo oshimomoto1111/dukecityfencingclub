@@ -4,51 +4,114 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 <section class="news-section" id="news">
 	<div class="news-container">
-		<h2 class="section-title">Latest News & Events</h2>
+		
+		<div class="news-header">
+			<span class="news-kicker">Latest From The Strip</span>
+			<h2 class="section-title-custom">News, Events & Announcements</h2>
+			<p class="news-subtitle">
+				Follow our competitive results, upcoming camps, and club notices as our fencers compete locally and nationally.
+			</p>
+		</div>
+
 		<div class="bento-grid">
 			
-			<!-- Noticia Principal Destacada -->
-			<div class="news-card news-card-featured" style={`background-image: url('${base}noticia-principal.jpg');`}>
-				<div class="news-content">
-					<span class="news-tag tag-achievement">🏆 Achievement</span>
-					<span class="news-date">August 2026</span>
-					<h3 class="news-title">Duke City Fencers Take Gold at Regional Championship!</h3>
-					<p class="news-excerpt">
-						Our competitive team dominated the strip this past weekend, bringing home multiple medals and national qualification points.
-					</p>
-					<button class="news-link open-booking" type="button">Join the Team ➔</button>
+			<!-- Card 1: Tournament Achievements (Featured Slot) -->
+			<div class="bento-card bento-card-featured">
+				<div class="card-glow-bg"></div>
+				<div class="bento-card-inner">
+					<div class="tag-row">
+						<span class="news-tag tag-achievement"><i class="fas fa-trophy"></i> Tournament Results</span>
+						<span class="status-pill"><i class="fas fa-circle-dot"></i> Updated Seasonally</span>
+					</div>
+
+					<div class="bento-card-body">
+						<div class="empty-icon-wrap">
+							<i class="fas fa-medal"></i>
+						</div>
+						<h3 class="bento-title">Competitive Tournament Results</h3>
+						<p class="bento-desc">
+							Podium finishes, regional medal results, and national qualification points from our travel team will be published here following each major competition.
+						</p>
+					</div>
+
+					<div class="bento-card-footer">
+						<span class="placeholder-notice"><i class="fas fa-info-circle"></i> Check back soon for upcoming tournament recaps</span>
+					</div>
 				</div>
 			</div>
 
-			<!-- Noticias Secundarias -->
+			<!-- Columna lateral: Eventos y Avisos -->
 			<div class="bento-side">
-				<div class="news-card news-card-small" style={`background-image: url('${base}noticia-camp.jpg');`}>
-					<div class="news-content">
-						<span class="news-tag tag-event">📅 Event</span>
-						<span class="news-date">Upcoming Intensive</span>
-						<h4 class="news-title">High-Performance Summer Training Camp</h4>
-						<button class="news-link open-booking" type="button">View Dates & Register ➔</button>
+				
+				<!-- Card 2: Upcoming Events & Clinics -->
+				<div class="bento-card bento-card-small">
+					<div class="card-glow-bg"></div>
+					<div class="bento-card-inner">
+						<div class="tag-row">
+							<span class="news-tag tag-event"><i class="fas fa-calendar-alt"></i> Upcoming Events</span>
+						</div>
+
+						<div class="bento-card-body">
+							<h4 class="bento-title-small">Camps, Clinics & Workshops</h4>
+							<p class="bento-desc-small">
+								Intensive seasonal training camps, referee seminars, and guest master clinics will be announced here with online registration links.
+							</p>
+						</div>
+
+						<div class="bento-card-footer">
+							<span class="placeholder-notice"><i class="fas fa-clock"></i> Dates to be announced</span>
+						</div>
 					</div>
 				</div>
 
-				<div class="news-card news-card-small" style={`background-image: url('${base}noticia-aviso.jpg');`}>
-					<div class="news-content">
-						<span class="news-tag tag-announcement">📢 Announcement</span>
-						<span class="news-date">Club Schedule Update</span>
-						<h4 class="news-title">New Open Armorer & Conditioning Hours</h4>
-						<button class="news-link open-booking" type="button">Check Schedule ➔</button>
+				<!-- Card 3: Club Announcements -->
+				<div class="bento-card bento-card-small">
+					<div class="card-glow-bg"></div>
+					<div class="bento-card-inner">
+						<div class="tag-row">
+							<span class="news-tag tag-announcement"><i class="fas fa-bullhorn"></i> Club Notice</span>
+						</div>
+
+						<div class="bento-card-body">
+							<h4 class="bento-title-small">Facility & Schedule Updates</h4>
+							<p class="bento-desc-small">
+								Important member notices, holiday gym hours, and open armory schedules will appear in this bulletin.
+							</p>
+						</div>
+
+						<div class="bento-card-footer">
+							<span class="placeholder-notice"><i class="fas fa-check-circle"></i> Standard schedule currently in effect</span>
+						</div>
 					</div>
 				</div>
+
 			</div>
 
 		</div>
+
+		<!-- Social Media Direct Link Callout -->
+		<div class="news-social-callout">
+			<div class="social-callout-text">
+				<i class="fab fa-instagram callout-icon"></i>
+				<div>
+					<strong>Looking for daily photos and behind-the-scenes action?</strong>
+					<span>Follow <a href="https://www.instagram.com/dukecityfencing/" target="_blank" rel="noopener noreferrer">@dukecityfencing</a> on Instagram for real-time club updates.</span>
+				</div>
+			</div>
+			<a href="https://www.instagram.com/dukecityfencing/" target="_blank" rel="noopener noreferrer" class="btn-social-follow">
+				Follow on Instagram <i class="fas fa-arrow-right"></i>
+			</a>
+		</div>
+
 	</div>
 </section>
 
 <style>
 	.news-section {
 		padding: var(--section-padding);
-		background-color: var(--bg-cream);
+		background-color: #0d1e16;
+		color: var(--text-light);
+		position: relative;
 	}
 
 	.news-container {
@@ -56,10 +119,44 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		margin: 0 auto;
 	}
 
+	.news-header {
+		text-align: center;
+		max-width: 760px;
+		margin: 0 auto 3.5rem;
+	}
+
+	.news-kicker {
+		display: inline-block;
+		color: var(--gold);
+		font-weight: 800;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin-bottom: 0.5rem;
+	}
+
+	.section-title-custom {
+		font-size: 2.5rem;
+		color: var(--bg-cream);
+		margin-bottom: 0.85rem;
+		font-family: var(--font-headings);
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	.news-subtitle {
+		font-size: 1.05rem;
+		opacity: 0.85;
+		line-height: 1.6;
+		color: #e0e0e0;
+	}
+
+	/* Bento Grid Layout */
 	.bento-grid {
 		display: grid;
 		grid-template-columns: 1.2fr 0.8fr;
 		gap: 2rem;
+		margin-bottom: 2.5rem;
 	}
 
 	.bento-side {
@@ -68,141 +165,241 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		gap: 2rem;
 	}
 
-	.news-card {
+	/* Bento Card Styling */
+	.bento-card {
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 16px;
 		position: relative;
-		border-radius: var(--border-radius);
 		overflow: hidden;
-		color: var(--text-light);
+		transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
-		padding: 2.25rem;
-		background-size: cover;
-		background-position: center;
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-		transition: transform 0.4s ease, box-shadow 0.4s ease;
-		cursor: pointer;
 	}
 
-	.news-card-featured {
-		min-height: 490px;
-		height: 100%;
+	.bento-card:hover {
+		transform: translateY(-3px);
+		border-color: rgba(212, 175, 55, 0.4);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 	}
 
-	.news-card-small {
+	.bento-card-featured {
+		min-height: 440px;
+		border: 1px solid rgba(212, 175, 55, 0.25);
+		background: linear-gradient(145deg, rgba(0, 59, 43, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
+	}
+
+	.bento-card-small {
 		flex: 1;
-		min-height: 230px;
+		min-height: 205px;
 	}
 
-	.news-card::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to top, rgba(0, 59, 43, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
-		transition: background 0.4s ease;
-		z-index: 1;
-	}
-
-	.news-card:hover {
-		transform: translateY(-6px);
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-	}
-
-	.news-card:hover::before {
-		background: linear-gradient(to top, rgba(0, 59, 43, 0.98) 0%, rgba(0, 0, 0, 0.6) 100%);
-	}
-
-	.news-content {
+	.bento-card-inner {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 		position: relative;
 		z-index: 2;
 	}
 
+	.tag-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
 	.news-tag {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
 		font-size: 0.75rem;
 		font-weight: 800;
 		text-transform: uppercase;
 		padding: 0.35rem 0.85rem;
 		border-radius: 50px;
-		letter-spacing: 1px;
-		margin-bottom: 0.8rem;
-	}
-
-	.tag-achievement {
-		background-color: var(--accent-red);
-		color: var(--text-light);
-	}
-
-	.tag-event {
-		background-color: var(--gold);
-		color: var(--text-dark);
-	}
-
-	.tag-announcement {
-		background-color: var(--primary-green);
-		color: var(--text-light);
-		border: 1px solid rgba(255, 255, 255, 0.3);
-	}
-
-	.news-date {
-		font-size: 0.85rem;
-		opacity: 0.85;
-		margin-bottom: 0.75rem;
-		display: block;
-		font-weight: 500;
-	}
-
-	.news-title {
-		font-size: 1.35rem;
-		line-height: 1.25;
-		margin-bottom: 0.6rem;
-		color: var(--bg-cream);
-	}
-
-	.news-card-featured .news-title {
-		font-size: 2.1rem;
-		line-height: 1.15;
-		margin-bottom: 0.85rem;
-	}
-
-	.news-excerpt {
-		font-size: 0.95rem;
-		opacity: 0.92;
-		margin-bottom: 1.25rem;
-		line-height: 1.6;
-	}
-
-	.news-link {
-		background: none;
-		border: none;
-		padding: 0;
-		font-size: 0.85rem;
-		font-weight: 700;
-		font-family: var(--font-headings);
-		text-transform: uppercase;
-		color: var(--bg-cream);
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		transition: gap 0.3s, color 0.3s;
-		cursor: pointer;
 		letter-spacing: 0.5px;
 	}
 
-	.news-card:hover .news-link {
-		gap: 0.8rem;
+	.tag-achievement {
+		background: rgba(226, 10, 23, 0.15);
 		color: var(--accent-red);
+		border: 1px solid rgba(226, 10, 23, 0.4);
+	}
+
+	.tag-event {
+		background: rgba(212, 175, 55, 0.15);
+		color: var(--gold);
+		border: 1px solid rgba(212, 175, 55, 0.4);
+	}
+
+	.tag-announcement {
+		background: rgba(0, 59, 43, 0.6);
+		color: #a3e6cd;
+		border: 1px solid rgba(0, 59, 43, 0.9);
+	}
+
+	.status-pill {
+		font-size: 0.75rem;
+		color: rgba(255, 255, 255, 0.6);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+
+	.status-pill i {
+		color: var(--gold);
+		font-size: 0.55rem;
+	}
+
+	.bento-card-body {
+		flex-grow: 1;
+		margin-bottom: 1.5rem;
+	}
+
+	.empty-icon-wrap {
+		width: 52px;
+		height: 52px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		color: var(--gold);
+		margin-bottom: 1.25rem;
+	}
+
+	.bento-title {
+		font-size: 1.6rem;
+		color: var(--bg-cream);
+		margin-bottom: 0.75rem;
+		font-family: var(--font-headings);
+		font-weight: 800;
+		line-height: 1.25;
+	}
+
+	.bento-title-small {
+		font-size: 1.25rem;
+		color: var(--bg-cream);
+		margin-bottom: 0.5rem;
+		font-family: var(--font-headings);
+		font-weight: 800;
+	}
+
+	.bento-desc {
+		font-size: 0.95rem;
+		color: #ccc;
+		line-height: 1.6;
+		max-width: 480px;
+	}
+
+	.bento-desc-small {
+		font-size: 0.88rem;
+		color: #bbb;
+		line-height: 1.5;
+	}
+
+	.bento-card-footer {
+		margin-top: auto;
+		padding-top: 1rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.placeholder-notice {
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.6);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.placeholder-notice i {
+		color: var(--gold);
+	}
+
+	/* Social Callout Banner */
+	.news-social-callout {
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 14px;
+		padding: 1.25rem 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	.social-callout-text {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.callout-icon {
+		font-size: 1.8rem;
+		color: #e1306c;
+	}
+
+	.social-callout-text strong {
+		display: block;
+		color: var(--bg-cream);
+		font-size: 0.95rem;
+		margin-bottom: 0.2rem;
+	}
+
+	.social-callout-text span {
+		font-size: 0.85rem;
+		color: #aaa;
+	}
+
+	.social-callout-text a {
+		color: var(--gold);
+		text-decoration: underline;
+		font-weight: 700;
+	}
+
+	.btn-social-follow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: #fff;
+		padding: 0.6rem 1.25rem;
+		border-radius: 50px;
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-decoration: none;
+		transition: background 0.25s, border-color 0.25s, color 0.25s;
+		white-space: nowrap;
+	}
+
+	.btn-social-follow:hover {
+		background: var(--gold);
+		color: var(--text-dark);
+		border-color: var(--gold);
 	}
 
 	@media (max-width: 900px) {
 		.bento-grid {
 			grid-template-columns: 1fr;
 		}
-		.news-card-featured {
-			min-height: 380px;
+		.section-title-custom {
+			font-size: 2.1rem;
 		}
-		.news-card-featured .news-title {
-			font-size: 1.7rem;
+		.news-social-callout {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.btn-social-follow {
+			width: 100%;
+			justify-content: center;
 		}
 	}
 </style>
