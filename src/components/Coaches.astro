@@ -297,7 +297,7 @@ const coaches = [
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 2rem;
-		align-items: stretch;
+		align-items: start;
 	}
 
 	.coach-card-interactive {
@@ -311,7 +311,6 @@ const coaches = [
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		height: 100%;
 	}
 
 	.coach-card-interactive:hover {
@@ -334,8 +333,7 @@ const coaches = [
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		flex-grow: 1;
-		height: 100%;
+		justify-content: flex-start;
 	}
 
 	.coach-avatar-wrap {
@@ -452,20 +450,20 @@ const coaches = [
 	}
 
 	.coach-card-interactive.expanded .coach-bio-drawer {
-		max-height: 800px;
+		max-height: 1200px;
 		opacity: 1;
 	}
 
 	.coach-bio-content {
-		padding: 1.25rem 1.4rem;
+		padding: 1.5rem 1.4rem 1.6rem;
 		text-align: left;
 	}
 
 	.coach-bio-text {
-		font-size: 0.9rem;
+		font-size: 0.92rem;
 		color: #e5e5e5;
-		line-height: 1.6;
-		margin-bottom: 1rem;
+		line-height: 1.65;
+		margin-bottom: 1.25rem;
 	}
 
 	.btn-close-bio {
