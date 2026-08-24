@@ -18,6 +18,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 			</ul>
 		</nav>
 		<div class="header-actions">
+			<a href="https://duke-city-fencing-club.gymdesk.com/login" target="_blank" rel="noopener noreferrer" class="btn-member-login">
+				<i class="fas fa-user-circle"></i> Member Login
+			</a>
 			<button class="btn-cta open-booking" type="button">Book A Class</button>
 			<button class="mobile-toggle" aria-label="Toggle navigation menu" type="button" id="mobileMenuBtn">
 				<i class="fas fa-bars"></i>
@@ -40,6 +43,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		<li><a href={`${base}#contact`} class="mobile-link">Contact</a></li>
 	</ul>
 	<div class="mobile-cta-wrapper">
+		<a href="https://duke-city-fencing-club.gymdesk.com/login" target="_blank" rel="noopener noreferrer" class="btn-member-login-mobile">
+			<i class="fas fa-user-circle"></i> Member Portal Login
+		</a>
 		<button class="btn-cta open-booking mobile-full-cta" type="button">Book A Class</button>
 	</div>
 </div>
@@ -134,6 +140,58 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		letter-spacing: 1px;
 		font-size: 0.85rem;
 		box-shadow: 0 4px 10px rgba(226, 10, 23, 0.35);
+	}
+
+	.btn-member-login {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(212, 175, 55, 0.6);
+		color: var(--gold);
+		padding: 0.65rem 1.15rem;
+		border-radius: var(--border-radius);
+		font-weight: 700;
+		font-family: var(--font-headings);
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		text-decoration: none;
+		transition: all 0.25s ease;
+		white-space: nowrap;
+	}
+
+	.btn-member-login:hover {
+		background: var(--gold);
+		color: var(--text-dark);
+		border-color: var(--gold);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+	}
+
+	.btn-member-login-mobile {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid var(--gold);
+		color: var(--gold);
+		padding: 0.85rem;
+		border-radius: var(--border-radius);
+		font-weight: 700;
+		font-family: var(--font-headings);
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		text-decoration: none;
+		margin-bottom: 0.85rem;
+		transition: all 0.25s ease;
+	}
+
+	.btn-member-login-mobile:hover {
+		background: var(--gold);
+		color: var(--text-dark);
 	}
 
 	.btn-cta:hover {

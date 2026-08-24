@@ -45,6 +45,10 @@ const currentYear = new Date().getFullYear();
 						<i class="fas fa-envelope"></i>
 						<a href="mailto:info@dukecityfencing.net" class="footer-mail">info@dukecityfencing.net</a>
 					</li>
+					<li>
+						<i class="fas fa-user-lock"></i>
+						<a href="https://duke-city-fencing-club.gymdesk.com/login" target="_blank" rel="noopener noreferrer" class="footer-member-link"><strong>Member Portal Login (Gymdesk) ➔</strong></a>
+					</li>
 				</ul>
 				
 				<!-- Google Maps embebido -->
@@ -200,6 +204,16 @@ const currentYear = new Date().getFullYear();
 
 	.footer-mail:hover {
 		color: var(--accent-red);
+		text-decoration: underline;
+	}
+
+	.footer-member-link {
+		color: var(--gold);
+		transition: color 0.3s;
+	}
+
+	.footer-member-link:hover {
+		color: #fff;
 		text-decoration: underline;
 	}
 
