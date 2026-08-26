@@ -6,15 +6,16 @@ const programs = [
 	{
 		id: "youth",
 		category: "youth",
-		badge: "Ages 6 – 9",
-		level: "Beginners & Mini Musketeers",
-		title: "Youth Fencing Class",
+		badge: "Ages 6 – 10",
+		level: "Youth Beginners",
+		title: "Mini Musketeers",
 		price: "$160",
 		period: "/month + tax",
-		trialInfo: "★ $10 Trial Class: Saturdays 9:45 AM – 10:30 AM",
+		trialInfo: "★ $10 Trial Session: Saturdays 9:45 AM – 10:30 AM",
 		trialBadge: "$10 Trial Available",
 		description: "The ideal starting point for young fencers. Engaging, high-energy classes focusing on agility, hand-eye coordination, blade safety, and fun fundamentals.",
 		schedules: [
+			{ days: "Saturdays (Trial)", time: "9:45 AM – 10:30 AM" },
 			{ days: "Mon & Wed", time: "4:30 PM – 6:00 PM" },
 			{ days: "Sat (Tournament)", time: "11:00 AM – 2:00 PM" },
 		],
@@ -24,22 +25,23 @@ const programs = [
 			"Inclusive Saturday morning in-house practice tournaments",
 			"Coached by certified youth fencing instructors",
 		],
-		ctaText: "Book $10 Trial Class",
+		ctaText: "Book $10 Mini Musketeers Trial",
 		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
 		img: `${base}program-youth.jpg`,
 	},
 	{
 		id: "competitive",
 		category: "competitive",
-		badge: "Ages 10+",
+		badge: "Ages 11 – 18",
 		level: "Intermediate & Advanced",
-		title: "Competitive Epee Program",
+		title: "Age Group 11–18 Program",
 		price: "$230",
 		period: "/month + tax",
 		trialInfo: "★ $10 Trial Session: Saturdays 12:30 PM – 1:15 PM",
 		trialBadge: "$10 Trial Available",
 		description: "Designed for ambitious athletes dedicated to regional (ROC/RYC) and national (NAC) tournament competition. Comprehensive tactical preparation and footwork.",
 		schedules: [
+			{ days: "Saturdays (Trial)", time: "12:30 PM – 1:15 PM" },
 			{ days: "Tue & Thu", time: "5:00 PM – 7:30 PM" },
 			{ days: "Mon – Thu", time: "Open Bouting (Included)" },
 			{ days: "Sat", time: "Conditioning & Tournament (10:30 AM – 1:00 PM)" },
@@ -50,7 +52,7 @@ const programs = [
 			"Tournament coaching support & national ranking pathways",
 			"Directed by 3-Time Olympic Medalist Courtney Hurley",
 		],
-		ctaText: "Book Competitive Trial",
+		ctaText: "Book $10 Age 11–18 Trial",
 		ctaLink: "https://duke-city-fencing-club.gymdesk.com/book",
 		img: `${base}program-competitive.jpg`,
 		featured: true,
@@ -63,11 +65,11 @@ const programs = [
 		title: "Adult Recreation Class",
 		price: "$140",
 		period: "/month + tax",
-		trialInfo: "★ $25 Trial & First Class: Mondays 6:30 PM",
+		trialInfo: "★ $25 Trial & First Class: Mondays 6:30 PM – 8:00 PM",
 		trialBadge: "$25 Trial & Class",
 		description: "A premier cardiovascular workout, mental chess on the strip, and a welcoming adult community. Led by Coach Andy with a focus on recreation and Epee skills.",
 		schedules: [
-			{ days: "Mondays", time: "7:00 PM – 8:00 PM" },
+			{ days: "Mondays (Trial + Class)", time: "6:30 PM – 7:00 PM (Trial) / 7:00 PM – 8:00 PM (Class)" },
 			{ days: "Sat (Tournament)", time: "11:00 AM – 2:00 PM" },
 		],
 		features: [
@@ -172,8 +174,8 @@ const programs = [
 		<!-- Interactive Category Filter Tabs -->
 		<div class="filter-tabs" role="tablist" aria-label="Program Categories">
 			<button class="tab-btn active" data-filter="all" role="tab" aria-selected="true">All Programs</button>
-			<button class="tab-btn" data-filter="youth" role="tab" aria-selected="false">Youth (Ages 6–9)</button>
-			<button class="tab-btn" data-filter="competitive" role="tab" aria-selected="false">Competitive (Ages 10+)</button>
+			<button class="tab-btn" data-filter="youth" role="tab" aria-selected="false">Mini Musketeers (Ages 6–10)</button>
+			<button class="tab-btn" data-filter="competitive" role="tab" aria-selected="false">Age Group 11–18</button>
 			<button class="tab-btn" data-filter="adults" role="tab" aria-selected="false">Adults (Ages 16+)</button>
 			<button class="tab-btn" data-filter="training" role="tab" aria-selected="false">Open Bouting & Lessons</button>
 		</div>
