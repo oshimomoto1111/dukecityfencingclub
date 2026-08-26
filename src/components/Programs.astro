@@ -244,7 +244,19 @@ const programs = [
 
 							<!-- CTA Button -->
 							<div class="card-cta-wrap">
-								<button class="btn-program-cta open-booking" type="button">
+								<button 
+									class="btn-program-cta open-booking" 
+									type="button"
+									data-program-id={prog.id}
+									data-title={prog.title}
+									data-badge={prog.badge}
+									data-level={prog.level}
+									data-price={`${prog.price} ${prog.period}`}
+									data-trial={prog.trialInfo}
+									data-schedules={JSON.stringify(prog.schedules)}
+									data-features={JSON.stringify(prog.features)}
+									data-link={prog.ctaLink}
+								>
 									{prog.ctaText} <i class="fas fa-arrow-right"></i>
 								</button>
 								<button class="btn-close-card" type="button">
