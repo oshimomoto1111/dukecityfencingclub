@@ -32,7 +32,7 @@ const coaches = [
 		role: "Fencing Coach",
 		img: `${base}violet.jpg`,
 		experience: "Youth Development Coach",
-		bio: "Coach Violet specializes in technical blade precision, agility footwork, and youth tournament preparation, helping developing fencers build strong fundamentals, discipline, and confidence on the strip.",
+		bio: "",
 	},
 ];
 ---
@@ -77,7 +77,12 @@ const coaches = [
 
 		<div class="team-grid">
 			{coaches.map((coach) => (
-				<article class="coach-card-interactive" tabindex="0" role="button" aria-expanded="false">
+				<article 
+					class={`coach-card-interactive ${!coach.bio ? 'no-bio' : ''}`} 
+					tabindex={coach.bio ? "0" : undefined} 
+					role={coach.bio ? "button" : undefined} 
+					aria-expanded={coach.bio ? "false" : undefined}
+				>
 					
 					<!-- Card Header / Cover (Photo, Name, Role) -->
 					<div class="coach-card-cover">
@@ -90,23 +95,27 @@ const coaches = [
 						<div class="coach-role">{coach.role}</div>
 						<div class="coach-exp-badge">{coach.experience}</div>
 
-						<!-- Interactive Trigger Button -->
-						<div class="coach-toggle-prompt">
-							<span class="prompt-text">Read Biography</span>
-							<span class="prompt-icon"><i class="fas fa-chevron-down"></i></span>
-						</div>
+						{coach.bio && (
+							<!-- Interactive Trigger Button -->
+							<div class="coach-toggle-prompt">
+								<span class="prompt-text">Read Biography</span>
+								<span class="prompt-icon"><i class="fas fa-chevron-down"></i></span>
+							</div>
+						)}
 					</div>
 
-					<!-- Expandable Bio Drawer (Hidden until clicked) -->
-					<div class="coach-bio-drawer">
-						<div class="coach-bio-content">
-							<p class="coach-bio-text">{coach.bio}</p>
+					{coach.bio && (
+						<!-- Expandable Bio Drawer (Hidden until clicked) -->
+						<div class="coach-bio-drawer">
+							<div class="coach-bio-content">
+								<p class="coach-bio-text">{coach.bio}</p>
 
-							<button class="btn-close-bio" type="button">
-								<i class="fas fa-chevron-up"></i> Close Bio
-							</button>
+								<button class="btn-close-bio" type="button">
+									<i class="fas fa-chevron-up"></i> Close Bio
+								</button>
+							</div>
 						</div>
-					</div>
+					)}
 
 				</article>
 			))}
@@ -320,6 +329,17 @@ const coaches = [
 		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 	}
 
+	.coach-card-interactive.no-bio {
+		cursor: default;
+	}
+
+	.coach-card-interactive.no-bio:hover {
+		transform: none;
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow: none;
+		background: rgba(255, 255, 255, 0.04);
+	}
+
 	.coach-card-interactive.expanded {
 		background: rgba(255, 255, 255, 0.08);
 		border-color: var(--gold);
@@ -516,6 +536,7 @@ const coaches = [
 	const coachCards = document.querySelectorAll('.coach-card-interactive');
 
 	coachCards.forEach((card) => {
+		if (card.classList.contains('no-bio')) return;
 		const promptLabel = card.querySelector('.prompt-text');
 		const closeBtn = card.querySelector('.btn-close-bio');
 
