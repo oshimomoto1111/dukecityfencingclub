@@ -1,5 +1,32 @@
 ---
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+const tournamentPhotos = [
+	{
+		src: `${base}tournament-zoe-medals.jpg`,
+		alt: "Zoe with 3 medals at the Air Force ROC & RJCC",
+		caption: "Zoe celebrating a 3-medal performance & earning her C26 rating!",
+		tag: "Triple Medalist"
+	},
+	{
+		src: `${base}tournament-zoe-podium.jpg`,
+		alt: "Zoe on the Medal Podium at Air Force Academy",
+		caption: "Zoe on the medal podium at the US Air Force Academy",
+		tag: "Podium Finish"
+	},
+	{
+		src: `${base}tournament-zoe-coaches.jpg`,
+		alt: "Zoe with Head Coach Courtney Hurley and Coach Bella",
+		caption: "Zoe with Head Coach Courtney Hurley & Coach Bella in Colorado",
+		tag: "Team & Coaches"
+	},
+	{
+		src: `${base}tournament-mark-results.jpg`,
+		alt: "Mark Kramer 3rd Place Veteran Men's Epee official results",
+		caption: "Mark Kramer securing 3rd Place in Veteran Men's Epee & earning C26 rating",
+		tag: "Vet Epee Results"
+	},
+];
 ---
 
 <section class="news-section" id="news">
@@ -7,84 +34,180 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		
 		<div class="news-header">
 			<span class="news-kicker">Latest From The Strip</span>
-			<h2 class="section-title-custom">News, Events & Announcements</h2>
+			<h2 class="section-title-custom">Tournament Results & News</h2>
 			<p class="news-subtitle">
-				Follow our competitive results, upcoming camps, and club notices as our fencers compete locally and nationally.
+				Celebrating our fencers’ achievements, podium finishes, and rating advancements at regional and national competitions.
 			</p>
 		</div>
 
-		<div class="bento-grid">
+		<!-- Featured Tournament Highlight: Air Force ROC & RJCC -->
+		<div class="tournament-hero-card">
+			<div class="card-glow-bg"></div>
 			
-			<!-- Card 1: Tournament Achievements (Featured Slot) -->
-			<div class="bento-card bento-card-featured">
+			<div class="tournament-hero-grid">
+				
+				<!-- Left: Interactive Gallery with exact requested photo sequence -->
+				<div class="tournament-gallery-wrap">
+					
+					<!-- Main Active Photo Display -->
+					<div class="gallery-main-view" id="galleryMainView">
+						<img 
+							id="activeTournamentImg" 
+							src={tournamentPhotos[0].src} 
+							alt={tournamentPhotos[0].alt} 
+							class="gallery-featured-img" 
+							width="600" 
+							height="450"
+						/>
+						<div class="gallery-badge-overlay" id="activeImgBadge">
+							<i class="fas fa-medal"></i> {tournamentPhotos[0].tag}
+						</div>
+						<div class="gallery-caption-bar" id="activeImgCaption">
+							{tournamentPhotos[0].caption}
+						</div>
+					</div>
+
+					<!-- Sequence Thumbnails (Click to Switch) -->
+					<div class="gallery-thumbs-row" role="tablist" aria-label="Tournament Photos">
+						{tournamentPhotos.map((photo, idx) => (
+							<button 
+								class={`thumb-btn ${idx === 0 ? 'active' : ''}`} 
+								data-index={idx}
+								data-src={photo.src}
+								data-alt={photo.alt}
+								data-caption={photo.caption}
+								data-tag={photo.tag}
+								aria-label={`View photo ${idx + 1}: ${photo.caption}`}
+								type="button"
+							>
+								<img src={photo.src} alt={photo.alt} class="thumb-img" width="100" height="75" loading="lazy" />
+								<span class="thumb-num">{idx + 1}</span>
+							</button>
+						))}
+					</div>
+				</div>
+
+				<!-- Right: Results & Recognition Details -->
+				<div class="tournament-info-wrap">
+					
+					<div class="tag-row">
+						<span class="news-tag tag-achievement">
+							<i class="fas fa-trophy"></i> Air Force ROC & RJCC
+						</span>
+						<span class="location-pill">
+							<i class="fas fa-map-marker-alt"></i> Colorado Springs, CO
+						</span>
+					</div>
+
+					<h3 class="tournament-title">Podium Finishes & New C26 Ratings!</h3>
+					<p class="tournament-intro">
+						Congratulations to our Duke City Fencing Club athletes for an outstanding performance at the <strong>Air Force ROC & RJCC</strong> in Colorado!
+					</p>
+
+					<!-- Athlete Result Cards -->
+					<div class="athletes-results-grid">
+						
+						<!-- Zoe's Results Card -->
+						<div class="athlete-card">
+							<div class="athlete-header">
+								<div class="athlete-avatar-badge"><i class="fas fa-shield-alt"></i></div>
+								<div>
+									<h4 class="athlete-name">Zoe</h4>
+									<span class="earned-rating-badge"><i class="fas fa-star"></i> Earned C26 Rating</span>
+								</div>
+							</div>
+							
+							<ul class="results-medals-list">
+								<li>
+									<span class="place-chip place-bronze"><i class="fas fa-medal"></i> 3rd Place</span>
+									<span class="event-name">Cadet Women’s Epee</span>
+								</li>
+								<li>
+									<span class="place-chip place-bronze"><i class="fas fa-medal"></i> 3rd Place</span>
+									<span class="event-name">Division II Women’s Epee</span>
+								</li>
+								<li>
+									<span class="place-chip place-top8"><i class="fas fa-award"></i> 7th Place</span>
+									<span class="event-name">Junior Women’s Epee</span>
+								</li>
+							</ul>
+						</div>
+
+						<!-- Mark Kramer's Results Card -->
+						<div class="athlete-card">
+							<div class="athlete-header">
+								<div class="athlete-avatar-badge"><i class="fas fa-shield-alt"></i></div>
+								<div>
+									<h4 class="athlete-name">Mark Kramer</h4>
+									<span class="earned-rating-badge"><i class="fas fa-star"></i> Earned C26 Rating</span>
+								</div>
+							</div>
+							
+							<ul class="results-medals-list">
+								<li>
+									<span class="place-chip place-bronze"><i class="fas fa-medal"></i> 3rd Place (Tie)</span>
+									<span class="event-name">Veteran Men’s Epee</span>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+
+					<div class="tournament-footer-note">
+						<i class="fas fa-heart"></i>
+						<span>Proud of our fencers, coaches, and families representing Duke City Fencing!</span>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Upcoming Events & Notices Bento Row -->
+		<div class="bento-subgrid">
+			
+			<!-- Card 2: Upcoming Events & Clinics -->
+			<div class="bento-card bento-card-half">
 				<div class="card-glow-bg"></div>
 				<div class="bento-card-inner">
 					<div class="tag-row">
-						<span class="news-tag tag-achievement"><i class="fas fa-trophy"></i> Tournament Results</span>
-						<span class="status-pill"><i class="fas fa-circle-dot"></i> Updated Seasonally</span>
+						<span class="news-tag tag-event"><i class="fas fa-calendar-alt"></i> Upcoming Events</span>
+						<span class="status-pill"><i class="fas fa-clock"></i> Fall 2026</span>
 					</div>
 
 					<div class="bento-card-body">
-						<div class="empty-icon-wrap">
-							<i class="fas fa-medal"></i>
-						</div>
-						<h3 class="bento-title">Competitive Tournament Results</h3>
-						<p class="bento-desc">
-							Podium finishes, regional medal results, and national qualification points from our travel team will be published here following each major competition.
+						<h4 class="bento-title-small">Camps, Clinics & Tournament Prep</h4>
+						<p class="bento-desc-small">
+							Intensive weekend training camps, referee seminars, and guest master clinics will be announced here with direct online registration.
 						</p>
 					</div>
 
 					<div class="bento-card-footer">
-						<span class="placeholder-notice"><i class="fas fa-info-circle"></i> Check back soon for upcoming tournament recaps</span>
+						<span class="placeholder-notice"><i class="fas fa-info-circle"></i> Event schedules updated regularly</span>
 					</div>
 				</div>
 			</div>
 
-			<!-- Columna lateral: Eventos y Avisos -->
-			<div class="bento-side">
-				
-				<!-- Card 2: Upcoming Events & Clinics -->
-				<div class="bento-card bento-card-small">
-					<div class="card-glow-bg"></div>
-					<div class="bento-card-inner">
-						<div class="tag-row">
-							<span class="news-tag tag-event"><i class="fas fa-calendar-alt"></i> Upcoming Events</span>
-						</div>
+			<!-- Card 3: Club Notices -->
+			<div class="bento-card bento-card-half">
+				<div class="card-glow-bg"></div>
+				<div class="bento-card-inner">
+					<div class="tag-row">
+						<span class="news-tag tag-announcement"><i class="fas fa-bullhorn"></i> Club Notice</span>
+						<span class="status-pill"><i class="fas fa-check-circle"></i> Active</span>
+					</div>
 
-						<div class="bento-card-body">
-							<h4 class="bento-title-small">Camps, Clinics & Workshops</h4>
-							<p class="bento-desc-small">
-								Intensive seasonal training camps, referee seminars, and guest master clinics will be announced here with online registration links.
-							</p>
-						</div>
+					<div class="bento-card-body">
+						<h4 class="bento-title-small">Saturday Tournaments & Strip Open Hours</h4>
+						<p class="bento-desc-small">
+							Saturday club tournaments run every non-travel weekend from 11:00 AM – 2:00 PM. Open to all members and regional drop-in fencers.
+						</p>
+					</div>
 
-						<div class="bento-card-footer">
-							<span class="placeholder-notice"><i class="fas fa-clock"></i> Dates to be announced</span>
-						</div>
+					<div class="bento-card-footer">
+						<span class="placeholder-notice"><i class="fas fa-map-marker-alt"></i> Duke City Fencing Gym • 301 Menaul Blvd NE</span>
 					</div>
 				</div>
-
-				<!-- Card 3: Club Announcements -->
-				<div class="bento-card bento-card-small">
-					<div class="card-glow-bg"></div>
-					<div class="bento-card-inner">
-						<div class="tag-row">
-							<span class="news-tag tag-announcement"><i class="fas fa-bullhorn"></i> Club Notice</span>
-						</div>
-
-						<div class="bento-card-body">
-							<h4 class="bento-title-small">Facility & Schedule Updates</h4>
-							<p class="bento-desc-small">
-								Important member notices, holiday gym hours, and open armory schedules will appear in this bulletin.
-							</p>
-						</div>
-
-						<div class="bento-card-footer">
-							<span class="placeholder-notice"><i class="fas fa-check-circle"></i> Standard schedule currently in effect</span>
-						</div>
-					</div>
-				</div>
-
 			</div>
 
 		</div>
@@ -95,7 +218,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <style>
 	.news-section {
 		padding: var(--section-padding);
-		background-color: #0d1e16;
+		background: linear-gradient(180deg, #091a13 0%, #040e0a 100%);
 		color: var(--text-light);
 		position: relative;
 	}
@@ -137,21 +260,349 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		color: #e0e0e0;
 	}
 
-	/* Bento Grid Layout */
-	.bento-grid {
-		display: grid;
-		grid-template-columns: 1.2fr 0.8fr;
-		gap: 2rem;
+	/* Tournament Hero Showcase Card */
+	.tournament-hero-card {
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(212, 175, 55, 0.35);
+		border-radius: 20px;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 		margin-bottom: 2.5rem;
+		transition: border-color 0.3s ease;
 	}
 
-	.bento-side {
+	.tournament-hero-card:hover {
+		border-color: rgba(212, 175, 55, 0.6);
+	}
+
+	.card-glow-bg {
+		position: absolute;
+		top: -100px;
+		right: -100px;
+		width: 350px;
+		height: 350px;
+		background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+		pointer-events: none;
+	}
+
+	.tournament-hero-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem;
+		padding: 2.5rem;
+		align-items: center;
+		position: relative;
+		z-index: 2;
+	}
+
+	/* Left Gallery */
+	.tournament-gallery-wrap {
 		display: flex;
 		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.gallery-main-view {
+		position: relative;
+		width: 100%;
+		height: 420px;
+		border-radius: 14px;
+		overflow: hidden;
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		background: #000;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+	}
+
+	.gallery-featured-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center top;
+		transition: opacity 0.3s ease, transform 0.4s ease;
+	}
+
+	.gallery-badge-overlay {
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		background: rgba(0, 59, 43, 0.85);
+		backdrop-filter: blur(8px);
+		border: 1px solid var(--gold);
+		color: var(--gold);
+		font-size: 0.8rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 0.35rem 0.85rem;
+		border-radius: 50px;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.gallery-caption-bar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.88) 100%);
+		color: #fff;
+		padding: 1.5rem 1.25rem 1rem;
+		font-size: 0.92rem;
+		font-weight: 600;
+		line-height: 1.4;
+	}
+
+	/* Thumbnails Row */
+	.gallery-thumbs-row {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.75rem;
+	}
+
+	.thumb-btn {
+		position: relative;
+		border-radius: 8px;
+		overflow: hidden;
+		border: 2px solid rgba(255, 255, 255, 0.15);
+		background: #000;
+		height: 75px;
+		cursor: pointer;
+		padding: 0;
+		transition: all 0.25s ease;
+	}
+
+	.thumb-btn:hover {
+		border-color: var(--gold);
+		transform: translateY(-2px);
+	}
+
+	.thumb-btn.active {
+		border-color: var(--gold);
+		box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+	}
+
+	.thumb-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.75;
+		transition: opacity 0.2s ease;
+	}
+
+	.thumb-btn:hover .thumb-img,
+	.thumb-btn.active .thumb-img {
+		opacity: 1;
+	}
+
+	.thumb-num {
+		position: absolute;
+		bottom: 4px;
+		right: 4px;
+		background: rgba(0, 0, 0, 0.75);
+		color: #fff;
+		font-size: 0.65rem;
+		font-weight: 800;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Right Info */
+	.tournament-info-wrap {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.tag-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.news-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.78rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		padding: 0.4rem 0.95rem;
+		border-radius: 50px;
+		letter-spacing: 0.5px;
+	}
+
+	.tag-achievement {
+		background: rgba(226, 10, 23, 0.2);
+		color: #ff6b6b;
+		border: 1px solid rgba(226, 10, 23, 0.5);
+	}
+
+	.location-pill {
+		font-size: 0.82rem;
+		color: rgba(255, 255, 255, 0.75);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.location-pill i {
+		color: var(--gold);
+	}
+
+	.tournament-title {
+		font-size: 2rem;
+		color: var(--bg-cream);
+		font-family: var(--font-headings);
+		font-weight: 800;
+		line-height: 1.2;
+		margin: 0;
+	}
+
+	.tournament-intro {
+		font-size: 0.98rem;
+		color: #ddd;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.tournament-intro strong {
+		color: var(--gold);
+	}
+
+	/* Athletes Cards */
+	.athletes-results-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.athlete-card {
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 12px;
+		padding: 1.15rem 1.25rem;
+		transition: border-color 0.25s ease;
+	}
+
+	.athlete-card:hover {
+		border-color: rgba(212, 175, 55, 0.4);
+	}
+
+	.athlete-header {
+		display: flex;
+		align-items: center;
+		gap: 0.85rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.athlete-avatar-badge {
+		width: 36px;
+		height: 36px;
+		border-radius: 8px;
+		background: rgba(212, 175, 55, 0.2);
+		color: var(--gold);
+		border: 1px solid var(--gold);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+	}
+
+	.athlete-name {
+		font-size: 1.2rem;
+		color: #fff;
+		margin: 0 0 0.15rem 0;
+		font-weight: 800;
+	}
+
+	.earned-rating-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		background: rgba(212, 175, 55, 0.25);
+		color: var(--gold);
+		border: 1px solid var(--gold);
+		padding: 0.15rem 0.55rem;
+		border-radius: 4px;
+		letter-spacing: 0.5px;
+	}
+
+	.results-medals-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.results-medals-list li {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		font-size: 0.9rem;
+	}
+
+	.place-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.75rem;
+		font-weight: 800;
+		padding: 0.2rem 0.6rem;
+		border-radius: 4px;
+		text-transform: uppercase;
+	}
+
+	.place-bronze {
+		background: rgba(205, 127, 50, 0.25);
+		color: #e59866;
+		border: 1px solid #cd7f32;
+	}
+
+	.place-top8 {
+		background: rgba(255, 255, 255, 0.12);
+		color: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.25);
+	}
+
+	.event-name {
+		color: #eee;
+		font-weight: 600;
+	}
+
+	.tournament-footer-note {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.88rem;
+		color: #aaa;
+		font-style: italic;
+		margin-top: 0.5rem;
+	}
+
+	.tournament-footer-note i {
+		color: var(--accent-red);
+	}
+
+	/* Bento Subgrid for other cards */
+	.bento-subgrid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		gap: 2rem;
 	}
 
-	/* Bento Card Styling */
 	.bento-card {
 		background: rgba(255, 255, 255, 0.03);
 		border: 1px solid rgba(255, 255, 255, 0.1);
@@ -169,15 +620,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 	}
 
-	.bento-card-featured {
-		min-height: 440px;
-		border: 1px solid rgba(212, 175, 55, 0.25);
-		background: linear-gradient(145deg, rgba(0, 59, 43, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
-	}
-
-	.bento-card-small {
-		flex: 1;
-		min-height: 205px;
+	.bento-card-half {
+		min-height: 200px;
 	}
 
 	.bento-card-inner {
@@ -187,33 +631,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		height: 100%;
 		position: relative;
 		z-index: 2;
-	}
-
-	.tag-row {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 1.5rem;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.news-tag {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		font-size: 0.75rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		padding: 0.35rem 0.85rem;
-		border-radius: 50px;
-		letter-spacing: 0.5px;
-	}
-
-	.tag-achievement {
-		background: rgba(226, 10, 23, 0.15);
-		color: var(--accent-red);
-		border: 1px solid rgba(226, 10, 23, 0.4);
 	}
 
 	.tag-event {
@@ -243,30 +660,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 	.bento-card-body {
 		flex-grow: 1;
-		margin-bottom: 1.5rem;
-	}
-
-	.empty-icon-wrap {
-		width: 52px;
-		height: 52px;
-		background: rgba(212, 175, 55, 0.1);
-		border: 1px solid rgba(212, 175, 55, 0.3);
-		border-radius: 12px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.5rem;
-		color: var(--gold);
 		margin-bottom: 1.25rem;
-	}
-
-	.bento-title {
-		font-size: 1.6rem;
-		color: var(--bg-cream);
-		margin-bottom: 0.75rem;
-		font-family: var(--font-headings);
-		font-weight: 800;
-		line-height: 1.25;
 	}
 
 	.bento-title-small {
@@ -275,13 +669,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		margin-bottom: 0.5rem;
 		font-family: var(--font-headings);
 		font-weight: 800;
-	}
-
-	.bento-desc {
-		font-size: 0.95rem;
-		color: #ccc;
-		line-height: 1.6;
-		max-width: 480px;
 	}
 
 	.bento-desc-small {
@@ -308,12 +695,59 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		color: var(--gold);
 	}
 
-	@media (max-width: 900px) {
-		.bento-grid {
+	@media (max-width: 990px) {
+		.tournament-hero-grid {
+			grid-template-columns: 1fr;
+			padding: 1.75rem;
+		}
+		.gallery-main-view {
+			height: 340px;
+		}
+		.bento-subgrid {
 			grid-template-columns: 1fr;
 		}
 		.section-title-custom {
 			font-size: 2.1rem;
 		}
+		.tournament-title {
+			font-size: 1.65rem;
+		}
 	}
 </style>
+
+<script>
+	// Tournament Photo Gallery Switcher
+	const thumbButtons = document.querySelectorAll('.thumb-btn');
+	const activeImg = document.getElementById('activeTournamentImg') as HTMLImageElement | null;
+	const activeBadge = document.getElementById('activeImgBadge');
+	const activeCaption = document.getElementById('activeImgCaption');
+
+	thumbButtons.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			thumbButtons.forEach((b) => b.classList.remove('active'));
+			btn.classList.add('active');
+
+			const src = btn.getAttribute('data-src');
+			const alt = btn.getAttribute('data-alt');
+			const caption = btn.getAttribute('data-caption');
+			const tag = btn.getAttribute('data-tag');
+
+			if (activeImg && src) {
+				activeImg.style.opacity = '0.4';
+				setTimeout(() => {
+					activeImg.src = src;
+					if (alt) activeImg.alt = alt;
+					activeImg.style.opacity = '1';
+				}, 150);
+			}
+
+			if (activeBadge && tag) {
+				activeBadge.innerHTML = `<i class="fas fa-medal"></i> ${tag}`;
+			}
+
+			if (activeCaption && caption) {
+				activeCaption.textContent = caption;
+			}
+		});
+	});
+</script>
