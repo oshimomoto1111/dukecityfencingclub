@@ -10,10 +10,17 @@ const tournamentPhotos = [
 		tag: "Triple Medalist"
 	},
 	{
-		src: `${base}tournament-zoe-podium.jpg`,
-		alt: "Zoe on the Medal Podium at US Air Force Academy",
-		title: "Podium Ceremony",
+		src: `${base}tournament-zoe-podium-1.jpg`,
+		alt: "Zoe on the Medal Podium (Cadet & Div II) at US Air Force Academy",
+		title: "Podium Ceremony — Cadet & Div II",
 		caption: "Zoe on the medal podium at the United States Air Force Academy in Colorado.",
+		tag: "Podium Finish"
+	},
+	{
+		src: `${base}tournament-zoe-podium-2.jpg`,
+		alt: "Zoe on the Junior Medal Podium at US Air Force Academy",
+		title: "Podium Ceremony — Junior Women's Epee",
+		caption: "Zoe on the medal podium for Junior Women's Epee at the Air Force RJCC.",
 		tag: "Podium Finish"
 	},
 	{
@@ -57,7 +64,7 @@ const tournamentPhotos = [
 						<div class="img-preview-overlay"></div>
 						<div class="preview-badge-row">
 							<span class="news-tag tag-achievement"><i class="fas fa-trophy"></i> Tournament Results</span>
-							<span class="photo-count-pill"><i class="fas fa-camera"></i> 4 Photos</span>
+							<span class="photo-count-pill"><i class="fas fa-camera"></i> 5 Photos</span>
 						</div>
 						<div class="preview-cta-prompt">
 							<span><i class="fas fa-expand-alt"></i> Click to Open Full Recap</span>
@@ -224,14 +231,13 @@ const tournamentPhotos = [
 		<!-- Full-Size Photos Gallery (In Exact Sequence Requested) -->
 		<div class="t-gallery-section">
 			<h3 class="t-box-title"><i class="fas fa-camera"></i> Full-Size Photo Gallery</h3>
-			<p class="t-gallery-subtitle">Photos from the competition floor, medal podium, and coaching team:</p>
+			<p class="t-gallery-subtitle">Photos from the competition floor, medal podiums, and coaching team:</p>
 
 			<div class="t-photos-vertical-stack">
 				
 				<!-- 1. Zoe with Medals -->
 				<figure class="t-photo-item">
 					<div class="t-photo-header">
-						<span class="t-photo-seq-num">1</span>
 						<h4>Zoe — Triple Medalist & C26 Rating</h4>
 					</div>
 					<div class="t-img-frame">
@@ -247,15 +253,14 @@ const tournamentPhotos = [
 					</figcaption>
 				</figure>
 
-				<!-- 2. Podium Ceremony -->
+				<!-- 2. Podium Ceremony 1 -->
 				<figure class="t-photo-item">
 					<div class="t-photo-header">
-						<span class="t-photo-seq-num">2</span>
-						<h4>Podium Ceremony — US Air Force Academy</h4>
+						<h4>Podium Ceremony — Cadet & Division II Women's Epee</h4>
 					</div>
 					<div class="t-img-frame">
 						<img 
-							src={`${base}tournament-zoe-podium.jpg`} 
+							src={`${base}tournament-zoe-podium-1.jpg`} 
 							alt="Zoe on the Medal Podium at Air Force Academy" 
 							class="t-full-img" 
 							loading="lazy" 
@@ -266,10 +271,27 @@ const tournamentPhotos = [
 					</figcaption>
 				</figure>
 
-				<!-- 3. Zoe with Coaches Courtney & Bella -->
+				<!-- 3. Podium Ceremony 2 -->
 				<figure class="t-photo-item">
 					<div class="t-photo-header">
-						<span class="t-photo-seq-num">3</span>
+						<h4>Podium Ceremony — Junior Women's Epee</h4>
+					</div>
+					<div class="t-img-frame">
+						<img 
+							src={`${base}tournament-zoe-podium-2.jpg`} 
+							alt="Zoe on the Junior Medal Podium at Air Force Academy" 
+							class="t-full-img" 
+							loading="lazy" 
+						/>
+					</div>
+					<figcaption class="t-photo-caption">
+						<i class="fas fa-info-circle"></i> Zoe on the medal podium for Junior Women's Epee at the Air Force RJCC.
+					</figcaption>
+				</figure>
+
+				<!-- 4. Zoe with Coaches Courtney & Bella -->
+				<figure class="t-photo-item">
+					<div class="t-photo-header">
 						<h4>Team & Coaching Staff</h4>
 					</div>
 					<div class="t-img-frame">
@@ -285,10 +307,9 @@ const tournamentPhotos = [
 					</figcaption>
 				</figure>
 
-				<!-- 4. Mark Kramer Official Results List -->
+				<!-- 5. Mark Kramer Official Results List -->
 				<figure class="t-photo-item">
 					<div class="t-photo-header">
-						<span class="t-photo-seq-num">4</span>
 						<h4>Official Results — Mark Kramer (3rd Place Veteran Men's Epee)</h4>
 					</div>
 					<div class="t-img-frame results-table-frame">
@@ -909,23 +930,9 @@ const tournamentPhotos = [
 	.t-photo-header {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		padding: 1rem 1.25rem;
+		padding: 1.1rem 1.4rem;
 		background: rgba(255, 255, 255, 0.04);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	.t-photo-seq-num {
-		width: 28px;
-		height: 28px;
-		border-radius: 50%;
-		background: var(--gold);
-		color: #000;
-		font-weight: 900;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 0.85rem;
 	}
 
 	.t-photo-header h4 {
